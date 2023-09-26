@@ -1,0 +1,113 @@
+.body-box-div {
+    height: calc(100% - 61px);
+    width: 70%;
+  
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+  
+    position: absolute;
+    top: 61px;
+    left: 60px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+
+    --text-id-color: #999999;
+}
+.itemFormDataBaseDiv {
+    height: 120px;
+    width: 97%;
+
+    position: relative;
+    left: calc(2% - 13px);
+    
+    margin: 10px;
+
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.idBox {
+    width: auto;
+    max-width: 40%;
+    
+    font-size: 20px;
+    font-weight: bold;
+
+    position: absolute;
+    left: 30px;
+    top: -10px;
+
+    color: var(--text-id-color);
+}
+.tradingNameBox {
+    width: auto;
+    max-width: 50%;
+
+    position: absolute;
+    top: 35px;
+    left: 30px;
+
+    font-size: 30px;
+}
+.tradingNameText {
+    font-weight: bold;
+    font-size: 15px;
+
+    position: absolute;
+    top: 35px;
+    left: 30px;
+}
+.amountBox {
+    width: auto;
+    max-width: 30%;
+
+    position: absolute;
+    top: 5px;
+    left: 30%;
+
+
+    font-size: 40px;
+}
+.amountText {
+    position: absolute;
+    left: 30%;
+
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.datePurchaseText {
+    position: absolute;
+    left: 65%;
+    top: -5px;
+
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.datePurchaseBox {
+    position: absolute;
+    left: 78%;
+    top: -5px;
+
+    font-size: 20px;
+}
+
+.dateInputText {
+    position: absolute;
+    left: 65%;
+    top: 45px;
+
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dateInputBox {
+    position: absolute;
+    left: 78%;
+    top: 45px;
+
+    font-size: 20px;
+}

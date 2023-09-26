@@ -1,0 +1,162 @@
+.Right-Box-div {
+    height: calc(100% - 61px);
+    width: calc(30% - 62px);
+  
+    background-color: antiquewhite;
+  
+    position: absolute;
+    right: 0px;
+    top: 61px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    --text-total: brown;
+    --text-remaining: #009900;
+}
+
+.Form-box-form {
+  height: 150px;
+  width: 90%;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  position: relative;
+  top: 20px;
+  left: 5%;
+
+  background-color: white;
+}
+.Form-box-form :nth-child(1) {
+  height: 25px;
+  width: calc(100%  - 20px);
+
+  text-align: center;
+  font-size: 20px;
+
+  position: absolute;
+  left: 10px;
+}
+.Form-box-form :nth-child(2) {
+  height: 25px;
+  width: 250px;
+
+  position: absolute;
+  top: 60px;
+  left: 10px;
+}
+.Form-box-form :nth-child(3) {
+  height: 25px;
+  width: 160px;
+
+  position: absolute;
+  top: 60px;
+  right: 10px;
+}
+.Form-box-form :nth-child(4) {
+  height: 25px;
+  width: 160px;
+
+  position: absolute;
+  top: 105px;
+  left: 10px;
+}
+.Form-box-form :nth-child(5) {
+  height: 28px;
+  width: 160px;
+
+  position: absolute;
+  top: 105px;
+  right: 10px;
+}
+.Form-box-form :nth-child(6) {
+  height: 31px;
+  width: 85px;
+
+  position: absolute;
+  top: 105px;
+  left: 185px;
+}
+
+
+
+.CalcInformation-div {
+  height: 500px;
+  width: 90%;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  position: relative;
+  top: 45px;
+  left: 5%;
+
+  background-color: white;
+}
+.informationText-h3 {
+  text-align: center;
+}
+
+.TimeBox-p {
+  font-size: 20px;
+  position: relative;
+  left: 20px;
+}
+
+.TotalInMonthBox-h2 {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+}
+
+
+
+.TotalBox-div {
+  height: 60px;
+  width: 90%;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  position: relative;
+  top: 70px;
+  left: 5%;
+
+  background-color: white;
+
+  margin-bottom: 10px;
+}
+
+.Total-h2 {
+  font-size: 25px;
+
+  position: absolute;
+  bottom: -5px;
+  left: 20px;
+
+  color: var(--text-total);
+}
+
+.RemainingBox-div {
+  height: 60px;
+  width: 90%;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  position: relative;
+  top: 70px;
+  left: 5%;
+
+  background-color: white;
+}
+.Remaining-h2 {
+  font-size: 25px;
+
+  position: absolute;
+  bottom: -5px;
+  left: 20px;
+
+  color: var(--text-remaining);
+}

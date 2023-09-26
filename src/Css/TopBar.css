@@ -1,0 +1,75 @@
+.TopBar-box-div {
+  height: 60px;
+  width: 100%;
+
+  border-bottom: 1px solid black;
+
+  display: grid;
+  grid-template-columns: 90px 300px auto 350px 25px 120px 20px;
+  grid-template-rows: 60px;
+
+  position: absolute;
+  
+}
+.Reload-button {
+  height: 50px;
+  width: 90%;
+
+  position: relative;
+  top: 5px;
+}
+
+.Text-Admin-h1 {
+  height: 100%;
+  width: 100%;
+
+  text-align: center;
+  margin: 5px;
+}
+
+
+.Since-ToDateBox-div {
+  position: relative;
+}
+.SinceText-p {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+
+  font-weight: bold;
+}
+.dateSince-input {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+}
+
+.ToDateText-p {
+  position: absolute;
+  top: -10px;
+  left: 180px;
+
+  font-weight: bold;
+}
+.dateToDate-input {
+  position: absolute;
+  top: 30px;
+  left: 180px;
+}
+
+.leftBoxHide-button {
+  height: 40px;
+  width: 40px;
+
+  position: relative;
+  left: 10px;
+  top: 10px;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.ReceiveText-h2 {
+  text-align: center;
+  position: relative;
+}

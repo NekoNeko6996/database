@@ -1,0 +1,62 @@
+.LeftBox-div {
+    position: absolute;
+    top: 61px;
+
+    height: calc(100% - 61px);
+    width: 300px;
+
+    border-right: 1px solid black;
+
+    transition: .5s;
+
+    background-color: white;
+
+    z-index: 10;
+}
+
+#LeftBox-close {
+    transform: translateX(-300px);
+}
+#LeftBox-open {
+    transform: translateX(0px);
+}
+
+
+.InputNameGiver-input {
+    height: 30px;
+    width: 250px;
+
+    position: relative;
+    left: 20px;
+
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+.InputReceive-input {
+    height: 30px;
+    width: 250px;
+
+    position: relative;
+    left: 20px;
+
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+
+.DateReceive-box {
+    height: 25px;
+    font-size: 15px;
+
+    position: relative;
+    right: -40px;
+}
+.ReceiveSubmit-button {
+    height: 30px;
+    width: 110px;
+    font-size: 15px;
+
+    position: relative;
+    left: 20px;
+}
