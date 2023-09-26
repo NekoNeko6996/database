@@ -1,7 +1,11 @@
 //for Data Base Mongo//
-const uri = 'mongodb+srv://nhnamAdmin1:Namvip93817@cluster0.rk9dttt.mongodb.net/';
+const uri = process.env.MONGODB_URI;
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(uri);
+
+//
+require('dotenv').config();
+
 
 //thông tin data base//
 const NameDataBase = 'Data_Store';
@@ -161,4 +165,6 @@ app.post('/SaveReceive', (req, resp) => {
 
 
 //port server//
-app.listen(3001);
+let server = app.listen(process.env.PORT || 3000, function () {
+    console.log(`Server listening on port ${server.address().port}`);
+});
