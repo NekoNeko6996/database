@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Web react client and local server to store information about your expenses and income
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is still under development
+Please send any comments or questions to `Hoangnam11013@gmail.com`
+
+## About Backend
+
+To run the server locally you need to navigate to the backend src folder and run the command `nodemon index.js`
 
 ## Available Scripts
 
