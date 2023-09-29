@@ -6,8 +6,7 @@ import './Css/RightBox.css';
 import './Css/LeftBox.css';
 
 //Modun//
-import { useState } from 'react'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 //
 const date = new Date();
@@ -52,9 +51,6 @@ function App() {
     const [DatePurchase, setDatePurchase] = useState("");
     //
     const [DataResp, setDataResp] = useState();
-    const [FullLoadSpendDataResp, setFullLoadSpendDataResp] = useState();
-    const [FullLoadReceiveDataResp, setFullLoadReceiveDataResp] = useState();
-    const [SpendDataSinceResp, setSpendDataSinceResp] = useState();
     //
     const [ItemHtml, setItemHtml] = useState("");
     //
@@ -68,16 +64,17 @@ function App() {
     const [NameGiver, setNameGiver] = useState("");
     const [AmountReceive, setAmountReceive] = useState("");
     const [DateReceive, setDateReceive] = useState("");
+    //
+    const [SearchString, setSearchString] = useState("");
 
-
-    ////
-    const fullDataBaseLoadRequest = async () => {
+    //full load để lấy tổng tiền đã dùng và số tiền còn lại//
+    const fullSpendAndBalanceRequest = async () => {
         let Data = await fetch(
-        'http://localhost:3001/fullDataBaseSpentLoadRequest', {
+        'http://localhost:8000/fullSpendAndBalanceRequest', {
             method: "post",
             body: JSON.stringify(
                 {
-                    content: "fullDataBaseSpendLoadRequest",
+                    title: "fullSpendAndBalanceRequest",
                     date: new Date()
                 }
             ),
@@ -88,55 +85,24 @@ function App() {
 
         Data = await Data.json();
         if(Data) {
-            setFullLoadSpendDataResp(Data.FullSpend);
-            setFullLoadReceiveDataResp(Data.FullReceive);
-            setSpendDataSinceResp(Data.SpendSince);
+            setTotalMoney(Data.FullSpend)
+            setRemainingMoney(Data.AccountBalance);
             console.log(Data);
         }
     }
-    //
-    useEffect(() => {
-        if(FullLoadSpendDataResp) {
-            let SumFullLoad = 0;
-            FullLoadSpendDataResp.map((data) => {
-                SumFullLoad += data.Amount;
-                return 0;
-            });
-            setTotalMoney(SumFullLoad);
-        }
-    }, [FullLoadSpendDataResp]);
-    //tính toán số dư còn lại//
-    useEffect(() => {
-        let SumFullReceive = 0;
-        let SumSpendSince = 0;
-        if(FullLoadReceiveDataResp) {
-
-            FullLoadReceiveDataResp.map((data) => {
-                SumFullReceive += data.Amount;
-                return 0;
-            });
-        }
-        if(SpendDataSinceResp) {
-            SpendDataSinceResp.map((data) => {
-                SumSpendSince += data.Amount;
-                return 0;
-            });
-        }
-        setRemainingMoney(SumFullReceive - SumSpendSince);
-    }, [FullLoadReceiveDataResp, SpendDataSinceResp])
-
 
 
     //request để load dữ liệu hiển thị//
     const DataBaseLoad = async () => {
         let DataBase = await fetch(
-        'http://localhost:3001/onloadRequest', {
+        'http://localhost:8000/onloadRequest', {
             method: "post",
             body: JSON.stringify(
                 {
-                    content: "loadRequest", 
+                    title: "OnloadRequest", 
                     date: new Date(),
-                    TimeFilter: {since: Since, toDate: ToDate}
+                    TimeFilter: {since: Since, toDate: ToDate},
+                    ConstTimeFilter: { since: `${year}-${month}-01`, toDate: `${year}-${month}-${day}`}
                 }),
             headers: {
                 'Content-Type': 'application/json'
@@ -154,7 +120,9 @@ function App() {
     //khắc phụ lỗi request 2 lần//
     useEffect(() => {
         DataBaseLoad();
-        fullDataBaseLoadRequest();
+        fullSpendAndBalanceRequest();
+
+        console.log("GO");
 
         //thêm comment dưới đây để tắt thông báo warning//
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -178,15 +146,16 @@ function App() {
 
 
     //function chạy khi nhấn submit button//
-    const handleOnSubmit = async (e) => {
-        e.preventDefault();
+    const handleOnSubmit = async (event) => {
+        event.preventDefault();
 
         //gửi yêu cầu tạo người dùng đến sẻver//
         let result = await fetch(
-        'http://localhost:3001/SaveSpend', {
+        'http://localhost:8000/SaveSpend', {
             method: "post",
             body: JSON.stringify(
                 {
+                    title: 'SaveSpend',
                     TradingName, 
                     Amount, 
                     Currency, 
@@ -210,13 +179,15 @@ function App() {
 
 
     //
-    const SubmitReceive = async () => {
+    const SubmitReceive = async (event) => {
+        event.preventDefault();
         //gửi đến server//
         let data = await fetch(
-        'http://localhost:3001/SaveReceive', {
+        'http://localhost:8000/SaveReceive', {
             method: "post",
             body: JSON.stringify(
                 {
+                    title: 'saveReceive',
                     NameGiver,
                     Amount:  AmountReceive,
                     date: DateReceive,
@@ -237,6 +208,28 @@ function App() {
         }
     }
 
+    //gửi search request//
+    const SearchRequest = async (event) => {
+        event.preventDefault();
+        let result = await fetch(
+        'http://localhost:8000/SearchRequest', {
+            method: "post",
+            body: JSON.stringify({
+                title: "searchRequest",
+                SearchString
+            }),
+            headers: {
+                'content-Type': 'application/json'
+            }
+        })
+
+        result = await result.json();
+        if(result) {
+            setDataResp(result);
+        }
+    }
+
+
 
 
     //đống mở left box//
@@ -256,7 +249,12 @@ function App() {
             <div className='TopBar-box-div'>
                 <button className='leftBoxHide-button' onClick={onButtonHideClick}>L</button>
                 <h1 className='Text-Admin-h1'>Admin Page</h1>
-                <div></div>
+                <div>
+                    <form action='' className='searchBox-form'>  
+                        <input type='text' placeholder='Search something...'className='searchInput-input' value={SearchString} onChange={(event) => setSearchString(event.target.value)}/>
+                        <input type='submit' value={"Search"} className='searchSubmit-inputBtn' onClick={SearchRequest}/>
+                    </form>
+                </div>
 
                 <div className='Since-ToDateBox-div'>
                     <p className='SinceText-p'>Since</p>
@@ -270,11 +268,13 @@ function App() {
             </div>
 
             <div className='LeftBox-div' id='LeftBox-close'>
-                <h2 className='ReceiveText-h2'>Receive</h2>
-                <input type='text' placeholder='Name giver...' value={NameGiver} onChange={(event) => setNameGiver(event.target.value)} className='InputNameGiver-input'/>
-                <input type='text' placeholder='Amount receive...' value={AmountReceive} onChange={(event) => setAmountReceive(event.target.value)} className='InputReceive-input'/>
-                <button className='ReceiveSubmit-button' onClick={SubmitReceive}>Submit</button>
-                <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
+                <form action=''> 
+                    <h2 className='ReceiveText-h2'>Receive</h2>
+                    <input type='text' placeholder='Name giver...' value={NameGiver} onChange={(event) => setNameGiver(event.target.value)} className='InputNameGiver-input'/>
+                    <input type='text' placeholder='Amount receive...' value={AmountReceive} onChange={(event) => setAmountReceive(event.target.value)} className='InputReceive-input'/>
+                    <input type='submit' className='ReceiveSubmit-button' onClick={SubmitReceive} value={"Submit"}/>
+                    <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
+                </form>
             </div>
 
             <div className='body-box-div'>
@@ -288,12 +288,12 @@ function App() {
                     <input type='text' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)}/>
                     <input type='type' placeholder='Currency...' value={Currency} onChange={(event) => setCurrency(event.target.value)}/>
                     <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)}/>
-                    <button className='Submit-button' id='save' onClick={handleOnSubmit}>Submit</button> 
+                    <input type='submit' className='Submit-button' id='save' onClick={handleOnSubmit} value={"Submit"}/> 
                 </form>
 
                 <div className='CalcInformation-div'>
-                    <h3 className='informationText-h3'>INFORMATION</h3>
-                    <p className='TimeBox-p'>Time: {date.getUTCMonth() + 1}/{date.getUTCFullYear()}</p>
+                    <h3 className='informationText-h3'>CALENDER</h3>
+                    <iframe title='Calender' src="https://calendar.google.com/calendar/embed?src=lqm231231%40gmail.com&ctz=Asia%2FHo_Chi_Minh"></iframe>
 
 
 

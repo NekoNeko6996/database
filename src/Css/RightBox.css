@@ -97,12 +97,17 @@
 .informationText-h3 {
   text-align: center;
 }
+iframe {
+  border: 0;
+  width: 90%;
+  height: 350px;
 
-.TimeBox-p {
-  font-size: 20px;
   position: relative;
-  left: 20px;
+  left: 5%;
 }
+
+
+
 
 .TotalInMonthBox-h2 {
   position: absolute;

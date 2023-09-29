@@ -73,3 +73,30 @@
   text-align: center;
   position: relative;
 }
+
+.searchBox-form {
+  height: 80%;
+  width: 80%;
+
+  position: relative;
+  left: 10%;
+  top: 12%;
+}
+.searchInput-input {
+  height: 60%;
+  width: 80%;
+
+  position: relative;
+  top: 10%;
+  left: 3%;
+
+  font-size: 20px;
+}
+.searchSubmit-inputBtn {
+  height: 73%;
+  width: 8%;
+
+  position: absolute;
+  top: 10%;
+  right: 7%;
+}
