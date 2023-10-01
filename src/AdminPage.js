@@ -4,6 +4,7 @@ import './Css/TopBar.css';
 import './Css/Body.css';
 import './Css/RightBox.css';
 import './Css/LeftBox.css';
+import './Css/navigationBar.css';
 
 //Modun//
 import { useState, useEffect } from 'react';
@@ -40,6 +41,89 @@ function ItemFormDataBaseDiv({ data }) {
     )
 };
 
+function NothingBox() {
+    return (
+        <div className='NothingBox-div'>
+            <img width="48" height="48" src="https://img.icons8.com/pulsar-color/48/nothing-found.png" alt="nothing-found" id='nothing-icon'/>
+            <p className='nothingText-p'>Hmm... Nothing To See Here</p>
+        </div>
+    )
+}
+
+
+function ChartBox(DataResp) {
+
+    console.log(DataResp.data);
+    let MaxValue = 0;
+    let indexValue = 0;
+
+    //tìm phần tử có amount lớn nhất//
+    DataResp.data.map((data, index) => {
+        if(data.Amount > MaxValue) MaxValue = data.Amount;
+        indexValue = index;
+        return 0;
+    })
+
+    const StyleChartBoxDiv = {
+        height: "99%",
+        width: "40%",
+    
+        position: "relative",
+        left: "1%",
+        top: "1%",
+    
+        borderRight: "1px solid black",
+    
+        overflow: "scroll",
+        
+        display: "grid",
+        gridTemplateRows: `repeat(${indexValue + 1}, 4%)`,
+        gridTemplateColumn: "100%",
+    } 
+    const StyleP = {
+        position: "absolute",
+        left: "0%",
+        width: "90px",
+        height: "auto",
+        textAlign: "center",
+        margin: "0",
+        fontWeight: "bold",
+        color: "#999999",
+    }
+    const StyleContainer = {
+        width: "100%",
+        height: "100%",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    }
+
+    const html_char = DataResp.data.map((data, index) => {
+
+        return <div className='ColumnContainer-div' style={StyleContainer}>
+            <div className='columnChartBox' key={`${data._id}${index}`} style={
+                {
+                    height: "90%",
+                    width: `${(data.Amount/MaxValue)*100 - 2}%`,
+                    border: "1px solid black",
+                    position: "absolute",
+                    left: "20%",
+                    alignItems: "center"
+                }}>
+            </div>
+            <p style={StyleP}>{data.date}</p>
+        </div>
+    })
+
+
+
+    return (
+        <div className='chartBox-div' style={StyleChartBoxDiv}>
+            {html_char}
+        </div>
+    )
+}
 
 
 
@@ -52,7 +136,7 @@ function App() {
     //
     const [DataResp, setDataResp] = useState();
     //
-    const [ItemHtml, setItemHtml] = useState("");
+    const [ItemHtml, setItemHtml] = useState([]);
     //
     const [TotalMoneyInMonth, setTotalMoneyInMonth] = useState(0);
     const [TotalMoney, setTotalMoney] = useState(0);
@@ -66,6 +150,9 @@ function App() {
     const [DateReceive, setDateReceive] = useState("");
     //
     const [SearchString, setSearchString] = useState("");
+    //
+    const [PageTag, setPageTag] = useState('spendPage');
+
 
     //full load để lấy tổng tiền đã dùng và số tiền còn lại//
     const fullSpendAndBalanceRequest = async () => {
@@ -88,6 +175,7 @@ function App() {
             setTotalMoney(Data.FullSpend)
             setRemainingMoney(Data.AccountBalance);
             console.log(Data);
+            
         }
     }
 
@@ -108,11 +196,11 @@ function App() {
                 'Content-Type': 'application/json'
             }        
         })
-
         //đợi server trả về//
         DataBase = await DataBase.json();
         if(DataBase) {
             console.log(DataBase);
+            setItemHtml([<NothingBox key={"nothing"} />]);
             setDataResp(DataBase);
         }
     }
@@ -122,27 +210,46 @@ function App() {
         DataBaseLoad();
         fullSpendAndBalanceRequest();
 
-        console.log("GO");
-
         //thêm comment dưới đây để tắt thông báo warning//
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
-    //load item để hiển thị//
-    useEffect(() => {
+    const setHtmlItem = async (DataResp) => {
         if(DataResp) {
+            console.log(PageTag);
             let Sum = 0;
-            //tạo mảng chứa thẻ item khi Biến DataResp thay đổi//
-            setItemHtml(DataResp.map((data) => {
-                //tính tổng tiền sữ dụng//
-                Sum += data.Amount;
-                //data truyền vào phải trùng tên với argument của hàm//
-                return <ItemFormDataBaseDiv key={data._id} data={data}/>
-            }));
-            setTotalMoneyInMonth(Sum);
+            if(DataResp.length !== 0) {
+                if(PageTag === 'spendPage') {
+                    //tạo mảng chứa thẻ item khi Biến DataResp thay đổi//
+                    await setItemHtml(DataResp.map((data) => {
+                        //tính tổng tiền sữ dụng//
+                        Sum += data.Amount;
+
+                        //data truyền vào phải trùng tên với argument của hàm//
+                        return <ItemFormDataBaseDiv key={data._id} data={data}/>
+                    }));
+                } 
+                if(PageTag === 'chartPage') {
+                    await setItemHtml([<ChartBox key={'ChartBox'} data={DataResp}/>])
+                }
+            } else {
+                console.log('nothing to see here ;)');
+                await setItemHtml([<NothingBox key={'nothingBox'} />])
+            };
+
+            console.log(ItemHtml);
+            await setTotalMoneyInMonth(Sum);
         }
-    },[DataResp]);
+    }
+    //load item để hiển thị - reload hàm khi có sự kiện nhấn chuyển tag Page//
+    useEffect(() => {
+       setHtmlItem(DataResp);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[DataResp, PageTag]);
+
+    
+
 
 
     //function chạy khi nhấn submit button//
@@ -231,7 +338,6 @@ function App() {
 
 
 
-
     //đống mở left box//
     const onButtonHideClick = () => {
         const LeftBox = document.querySelector('.LeftBox-div');
@@ -249,6 +355,14 @@ function App() {
             <div className='TopBar-box-div'>
                 <button className='leftBoxHide-button' onClick={onButtonHideClick}>L</button>
                 <h1 className='Text-Admin-h1'>Admin Page</h1>
+                
+                <div>
+                    <select name='tag' className='Select-tag-sel' onChange={(event) => setPageTag(event.target.value)}>
+                        <option value={'spendPage'}>Spend Page</option>
+                        <option value={'chartPage'}>Chart Page</option>
+                    </select>
+                </div>
+
                 <div>
                     <form action='' className='searchBox-form'>  
                         <input type='text' placeholder='Search something...'className='searchInput-input' value={SearchString} onChange={(event) => setSearchString(event.target.value)}/>
@@ -265,6 +379,12 @@ function App() {
 
                 <div></div>
                 <button className='Reload-button' id='reload' onClick={DataBaseLoad}>Reload Data</button>
+            </div>
+
+            <div className='left-navigation-bar-div'>
+                <a href='https://mail.google.com/mail/' target='_blank' rel="noreferrer">
+                    <img className='Mail-icon-img' src='https://www.thewindowsclub.com/wp-content/uploads/2020/10/Gmail-Logo.png' alt='loadErr'/>
+                </a>
             </div>
 
             <div className='LeftBox-div' id='LeftBox-close'>

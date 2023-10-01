@@ -13,7 +13,8 @@
     overflow-x: hidden;
 
 
-    --text-id-color: #999999;
+    --text-color: #999999;
+    --chart-column-color: #009966;
 }
 .itemFormDataBaseDiv {
     height: 120px;
@@ -24,9 +25,14 @@
     
     margin: 10px;
 
-    border: 1px solid black;
+    border: 2px solid black;
     border-radius: 20px;
 }
+.itemFormDataBaseDiv:hover {
+
+    border: 2px solid red;
+}
+
 .idBox {
     width: auto;
     max-width: 40%;
@@ -38,7 +44,7 @@
     left: 30px;
     top: -10px;
 
-    color: var(--text-id-color);
+    color: var(--text-color);
 }
 .tradingNameBox {
     width: auto;
@@ -110,4 +116,42 @@
     top: 45px;
 
     font-size: 20px;
+}
+
+.NothingBox-div {
+    height: 350px;
+    width: 600px;
+
+    position: relative;
+    top: calc(50% - 200px);
+    left: calc(50% - 300px);
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 100%;
+}
+#nothing-icon {
+    scale: 3;
+    position: relative;
+    top: 20%;
+
+    margin: auto;
+}
+.nothingText-p {
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    top: -10%;
+
+    text-align: center;
+    margin-top: 0;
+
+    color: var(--text-color);
+}
+
+
+.columnChartBox:hover {
+    background-color: var(--chart-column-color);
 }

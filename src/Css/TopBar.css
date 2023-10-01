@@ -5,7 +5,7 @@
   border-bottom: 1px solid black;
 
   display: grid;
-  grid-template-columns: 90px 300px auto 350px 25px 120px 20px;
+  grid-template-columns: 90px 245px 200px auto 350px 25px 120px 20px;
   grid-template-rows: 60px;
 
   position: absolute;
@@ -25,6 +25,7 @@
 
   text-align: center;
   margin: 5px;
+
 }
 
 
@@ -79,7 +80,7 @@
   width: 80%;
 
   position: relative;
-  left: 10%;
+  left: 5%;
   top: 12%;
 }
 .searchInput-input {
@@ -99,4 +100,17 @@
   position: absolute;
   top: 10%;
   right: 7%;
+}
+
+
+.Select-tag-sel {
+  height: 50%;
+  width: 80%;
+
+  font-size: 20px;
+
+  position: relative;
+  top: 25%;
+  left: 15%;
+
 }

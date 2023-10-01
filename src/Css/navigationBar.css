@@ -1,0 +1,26 @@
+.left-navigation-bar-div {
+    height: calc(100% - 61px);
+    width: 60px;
+
+    position: relative;
+    top: 61px;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+}
+
+.Mail-icon-img {
+    height: 50px;
+    width: 50px;
+
+    position: relative;
+    top: 20px;
+
+    transition: .1s;
+}
+.Mail-icon-img:hover {
+    scale: 1.1;
+    
+}

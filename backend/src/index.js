@@ -50,7 +50,7 @@ app.post( "/onloadRequest", async (req, resp) => {
 
         const result = await DataBase_Module.DataBase("", "reload", req.body.TimeFilter);
         
-        await DataBase_Module.DataBase("", "MonthlyDataAggregation", req.body.ConstTimeFilter)
+        await DataBase_Module.DataBase("", "MonthlyDataAggregation", req.body.ConstTimeFilter);
 
         //console.log(JSON.stringify(result));
 
