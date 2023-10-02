@@ -153,5 +153,5 @@
 
 
 .columnChartBox:hover {
-    background-color: var(--chart-column-color);
+    border: 3px solid black !important;
 }

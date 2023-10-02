@@ -7,7 +7,7 @@ import './Css/LeftBox.css';
 import './Css/navigationBar.css';
 
 //Modun//
-import { useState, useEffect } from 'react';
+import { useState, useEffect, React } from 'react';
 
 //
 const date = new Date();
@@ -63,6 +63,7 @@ function ChartBox(DataResp) {
         indexValue = index;
         return 0;
     })
+    console.log(MaxValue);
 
     const StyleChartBoxDiv = {
         height: "99%",
@@ -70,7 +71,7 @@ function ChartBox(DataResp) {
     
         position: "relative",
         left: "1%",
-        top: "1%",
+        top: "0%",
     
         borderRight: "1px solid black",
     
@@ -79,6 +80,7 @@ function ChartBox(DataResp) {
         display: "grid",
         gridTemplateRows: `repeat(${indexValue + 1}, 4%)`,
         gridTemplateColumn: "100%",
+        gridRowGap: "2px",
     } 
     const StyleP = {
         position: "absolute",
@@ -97,6 +99,7 @@ function ChartBox(DataResp) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        marginTop: "2%",
     }
 
     const html_char = DataResp.data.map((data, index) => {
@@ -105,11 +108,12 @@ function ChartBox(DataResp) {
             <div className='columnChartBox' key={`${data._id}${index}`} style={
                 {
                     height: "90%",
-                    width: `${(data.Amount/MaxValue)*100 - 2}%`,
+                    width: `${(data.Amount/MaxValue)*75}%`,
                     border: "1px solid black",
                     position: "absolute",
                     left: "20%",
-                    alignItems: "center"
+                    alignItems: "center",
+                    backgroundColor: "#FFCCFF",
                 }}>
             </div>
             <p style={StyleP}>{data.date}</p>
