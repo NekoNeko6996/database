@@ -51,76 +51,71 @@ function NothingBox() {
 }
 
 
-function ChartBox(DataResp) {
 
-    console.log(DataResp.data);
+//cột dọc//
+function ChartBoxVerticalColumn(props) {
     let MaxValue = 0;
     let indexValue = 0;
 
     //tìm phần tử có amount lớn nhất//
-    DataResp.data.map((data, index) => {
+    props.dataResp.map((data, index) => {
         if(data.Amount > MaxValue) MaxValue = data.Amount;
         indexValue = index;
         return 0;
     })
-    console.log(MaxValue);
 
     const StyleChartBoxDiv = {
-        height: "99%",
-        width: "40%",
-    
-        position: "relative",
-        left: "1%",
-        top: "0%",
-    
-        borderRight: "1px solid black",
-    
-        overflow: "scroll",
-        
-        display: "grid",
-        gridTemplateRows: `repeat(${indexValue + 1}, 4%)`,
-        gridTemplateColumn: "100%",
-        gridRowGap: "2px",
+        gridTemplateColumns: `repeat(${indexValue + 1}, 30px)`,
+    }
+
+    const html_char = props.dataResp.reverse().map((data, index) => {
+        return <div className='ColumnContainer-vertical-div'>
+            <div className='columnChartBox-vertical' key={`${data._id}${index}`} style={
+                {
+                    width: "90%",
+                    height: `${(data.Amount/MaxValue)*70}%`,
+                }}> <div className='TextContentChart-vertical-div'><p className='TextContentChart-p-vertical'>{data.Amount.toLocaleString("vi-VN")}</p></div>
+            </div>
+            <p className='date-char-vertical-p'>{data.month}-{data.year}</p>
+        </div>
+    })
+    //.reverse để đảo ngược thứ tự của element trong mảng item//
+    return (
+        <div className='chartBox-vertical-div' style={StyleChartBoxDiv}>
+            {html_char}
+        </div>
+    )
+}
+
+
+//cột ngang//
+//để nhận nhiều tham số thì dùng props//
+function ChartBoxHorizontalColumn(props) {
+    let MaxValue = 0;
+    let indexValue = 0;
+
+    //tìm phần tử có amount lớn nhất//
+    props.dataResp.map((data, index) => {
+        if(data.Amount > MaxValue) MaxValue = data.Amount;
+        indexValue = index;
+        return 0;
+    })
+
+    const StyleChartBoxDiv = {
+        gridTemplateRows: `repeat(${indexValue + 1}, 30px)`,
     } 
-    const StyleP = {
-        position: "absolute",
-        left: "0%",
-        width: "90px",
-        height: "auto",
-        textAlign: "center",
-        margin: "0",
-        fontWeight: "bold",
-        color: "#999999",
-    }
-    const StyleContainer = {
-        width: "100%",
-        height: "100%",
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "2%",
-    }
 
-    const html_char = DataResp.data.map((data, index) => {
-
-        return <div className='ColumnContainer-div' style={StyleContainer}>
+    const html_char = props.dataResp.map((data, index) => {
+        return <div className='ColumnContainer-div'>
             <div className='columnChartBox' key={`${data._id}${index}`} style={
                 {
                     height: "90%",
-                    width: `${(data.Amount/MaxValue)*75}%`,
-                    border: "1px solid black",
-                    position: "absolute",
-                    left: "20%",
-                    alignItems: "center",
-                    backgroundColor: "#FFCCFF",
-                }}>
+                    width: `${(data.Amount/MaxValue)*60}%`,
+                }}> <div className='TextContentChart-div'><p className='TextContentChart-p'>{data.Amount.toLocaleString("vi-VN")}</p></div>
             </div>
-            <p style={StyleP}>{data.date}</p>
+            <p className='date-char-v-p'>{data.date}</p>
         </div>
     })
-
-
 
     return (
         <div className='chartBox-div' style={StyleChartBoxDiv}>
@@ -128,6 +123,18 @@ function ChartBox(DataResp) {
         </div>
     )
 }
+
+
+function ChartBodyContainer(props) {
+    return (
+        <div>
+            <ChartBoxHorizontalColumn dataResp={props.dataSpend}/>
+            <ChartBoxVerticalColumn dataResp={props.data12Month} />
+        </div>
+    )
+}
+
+
 
 
 
@@ -139,6 +146,7 @@ function App() {
     const [DatePurchase, setDatePurchase] = useState("");
     //
     const [DataResp, setDataResp] = useState();
+    const [Data12Month, setData12Month] = useState([]);
     //
     const [ItemHtml, setItemHtml] = useState([]);
     //
@@ -203,7 +211,6 @@ function App() {
         //đợi server trả về//
         DataBase = await DataBase.json();
         if(DataBase) {
-            console.log(DataBase);
             setItemHtml([<NothingBox key={"nothing"} />]);
             setDataResp(DataBase);
         }
@@ -213,6 +220,7 @@ function App() {
     useEffect(() => {
         DataBaseLoad();
         fullSpendAndBalanceRequest();
+        MonthDataInYearRequest();
 
         //thêm comment dưới đây để tắt thông báo warning//
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -221,7 +229,6 @@ function App() {
 
     const setHtmlItem = async (DataResp) => {
         if(DataResp) {
-            console.log(PageTag);
             let Sum = 0;
             if(DataResp.length !== 0) {
                 if(PageTag === 'spendPage') {
@@ -231,26 +238,24 @@ function App() {
                         Sum += data.Amount;
 
                         //data truyền vào phải trùng tên với argument của hàm//
-                        return <ItemFormDataBaseDiv key={data._id} data={data}/>
+                        return <ItemFormDataBaseDiv key={data._id} data={data}/>;
                     }));
                 } 
                 if(PageTag === 'chartPage') {
-                    await setItemHtml([<ChartBox key={'ChartBox'} data={DataResp}/>])
+                    await setItemHtml([<ChartBodyContainer key={"charBoxSpend"} dataSpend={DataResp} data12Month={Data12Month}/>]);
                 }
+                setTotalMoneyInMonth(Sum);
             } else {
                 console.log('nothing to see here ;)');
-                await setItemHtml([<NothingBox key={'nothingBox'} />])
+                await setItemHtml([<NothingBox key={'nothingBox'} />]);
             };
-
-            console.log(ItemHtml);
-            await setTotalMoneyInMonth(Sum);
         }
     }
     //load item để hiển thị - reload hàm khi có sự kiện nhấn chuyển tag Page//
     useEffect(() => {
        setHtmlItem(DataResp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[DataResp, PageTag]);
+    },[DataResp, PageTag, Data12Month]);
 
     
 
@@ -283,8 +288,6 @@ function App() {
         if (result) {
             setTradingName("");
             setAmount("");
-            setCurrency("");
-            setDatePurchase("");
         }
     }
 
@@ -340,6 +343,26 @@ function App() {
         }
     }
 
+
+    //lấy dữ liệu của tháng//
+    const MonthDataInYearRequest = async () => {
+        let result = await fetch(
+            'http://localhost:8000/MonthDataInYearRequest', {
+            method: "post",
+            body: JSON.stringify({
+                title: "dataInMonthRequest",
+                date: new Date()
+            }),
+            headers: {
+                'content-Type': 'application/json'
+            }
+        })
+        result = await result.json();
+        if(result) {
+            console.log(result);
+            setData12Month(result);
+        }
+    }
 
 
     //đống mở left box//

@@ -76,7 +76,7 @@
 
   position: absolute;
   top: 105px;
-  left: 185px;
+  left: 184px;
 }
 
 
@@ -97,6 +97,8 @@
 .informationText-h3 {
   text-align: center;
 }
+
+/* Google calender */
 iframe {
   border: 0;
   width: 90%;

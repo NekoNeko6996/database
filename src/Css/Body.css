@@ -152,6 +152,175 @@
 }
 
 
+/* /////////////////Chart - Horizontal////////////////// */
+.chartBox-div {
+    height: 550px;
+    width: 40%;
+    
+    position: relative;
+    left: 1%;
+    top: 15px;
+
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    overflow-y: scroll;
+    
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: 5px;
+    box-shadow: 3px 3px 10px 0px #888888;
+}
+
 .columnChartBox:hover {
     border: 3px solid black !important;
+}
+.columnChartBox:hover > .TextContentChart-div {
+    opacity: 1;
+}
+
+.TextContentChart-div {
+    height: 100%;
+    width: 80px;
+
+    position: absolute;
+    right: -80px;
+    top: -1px;
+
+    opacity: 0;
+    transition: .3s;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.TextContentChart-p {
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: #999999;
+    position: relative;
+}
+
+.columnChartBox {
+    height: 90%;
+    
+    border: 1px solid black;
+    position: absolute;
+    left: 20%;
+    align-items: center;
+    background-color: #FFCCFF;
+    
+}
+
+.date-char-v-p {
+    position: absolute;
+    left: 10px;
+    
+    width: 90px;
+    height: auto;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    color: #999999;
+}
+
+.ColumnContainer-div {
+    width: 100%;
+    height: 30px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+/* ///////////////////////// */
+.chartBox-vertical-div {
+    height: 300px;
+    width: 56%;
+
+    position: relative;
+    top: -535px;
+    left: 43%;
+
+    display: grid;
+    grid-column-gap: 30px;
+
+    box-shadow: 3px 3px 10px 0px #888888;
+    border-radius: 15px;
+}
+.ColumnContainer-vertical-div {
+    height: 100%;
+    width: 30px;
+    
+    margin: 0;
+
+    left: 20px;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.columnChartBox-vertical {
+    bottom: 50px;
+
+    border: 1px solid black;
+    position: absolute;
+    left: 20%;
+    background-color: #ccffe3;
+
+}
+.columnChartBox-vertical:hover {
+    border: 3px solid black !important;
+}
+.columnChartBox-vertical:hover > .TextContentChart-vertical-div {
+    opacity: 1;
+}
+
+.TextContentChart-p-vertical {
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    color: #999999;
+    position: relative;
+}
+
+.TextContentChart-vertical-div {
+    height: 25px;
+    width: 120px;
+
+    position: absolute;
+    left: -45px;
+    top: -33px;
+    
+    opacity: 0;
+    transition: .3s;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-char-vertical-p {
+    position: absolute;
+    bottom: 10px;
+    left: -5px;
+
+    height: 20px;
+    width: 50px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

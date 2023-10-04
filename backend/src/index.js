@@ -106,5 +106,20 @@ app.post('/SearchRequest', async (req, resp) => {
 })
 
 
+//
+app.post('/MonthDataInYearRequest', async (req, resp) => {
+    try {
+        console.log(req.body);
+
+        const result = await DataBase_Module.DataBase("", "Data12Month");
+
+
+        resp.send(JSON.stringify(result));
+    } catch(e) {
+        console.log(e);
+    }
+})
+
+
 //port server//
 app.listen(PORT);

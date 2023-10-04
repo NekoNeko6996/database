@@ -30,15 +30,13 @@ async function Add(Client, Collection, Document) {
     Document.Amount = await parseInt(Document.Amount);
     
     await Client.collection(Collection).insertOne(Document);
-    await console.log(`Added to ${Collection} done!`);
 }
 
 //
-async function Read(Client, Collection, Condition) {
+async function Read(Client, Collection, Condition, Limit) {
     //tìm document theo điều kiện//
-    const cursor =  await Client.collection(Collection).find(Condition).sort({ date: 1 });
+    const cursor =  await Client.collection(Collection).find(Condition).sort({ date: -1 }).limit(Limit || 100);
     const result = await cursor.toArray();
-    console.log(`Read Data From ${Collection} with Condition done!`);
     return result;
 }
 
@@ -98,6 +96,7 @@ module.exports.DataBase = async function(Document, type, TimeFilter) {
                     {
                         Content: "Dữ Liệu Tổng Của Tháng",
                         Amount: result_Month_after_calculate,
+                        date: `${year}-${month}`,
                         month: `${month}`,
                         year: `${year}`
                     });
@@ -114,6 +113,10 @@ module.exports.DataBase = async function(Document, type, TimeFilter) {
 
                 //trả về//
                 return result_databaseFullLoad_searchRequest;
+
+            case 'Data12Month':
+                const Data12Month = await Read(DataBaseClient, 'Data_Month', {}, 12);
+                return Data12Month;
             default:
                 break;
         }
