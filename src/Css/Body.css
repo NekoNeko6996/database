@@ -169,7 +169,7 @@
     display: grid;
     grid-template-columns: 100%;
     grid-row-gap: 5px;
-    box-shadow: 3px 3px 10px 0px #888888;
+    box-shadow: 3px 3px 10px 0px #777777;
 }
 
 .columnChartBox:hover {
@@ -193,7 +193,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
 }
 
 .TextContentChart-p {
@@ -209,7 +209,7 @@
 .columnChartBox {
     height: 90%;
     
-    border: 1px solid black;
+    border: 3px solid #777777;
     position: absolute;
     left: 20%;
     align-items: center;
@@ -237,7 +237,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+#title-chart-month {
+    font-size: 20px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 /* ///////////////////////// */
 .chartBox-vertical-div {
@@ -249,9 +258,10 @@
     left: 43%;
 
     display: grid;
+    grid-template-rows: 35px auto;
     grid-column-gap: 30px;
 
-    box-shadow: 3px 3px 10px 0px #888888;
+    box-shadow: 3px 3px 10px 0px #777777;
     border-radius: 15px;
 }
 .ColumnContainer-vertical-div {
@@ -270,7 +280,7 @@
 .columnChartBox-vertical {
     bottom: 50px;
 
-    border: 1px solid black;
+    border: 3px solid #AAAAAA;
     position: absolute;
     left: 20%;
     background-color: #ccffe3;
@@ -279,17 +289,14 @@
 .columnChartBox-vertical:hover {
     border: 3px solid black !important;
 }
-.columnChartBox-vertical:hover > .TextContentChart-vertical-div {
-    opacity: 1;
-}
 
 .TextContentChart-p-vertical {
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
     margin: 0;
     padding: 0;
-    color: #999999;
+    color: #666666;
     position: relative;
 }
 
@@ -299,9 +306,9 @@
 
     position: absolute;
     left: -45px;
-    top: -33px;
+    top: -30px;
     
-    opacity: 0;
+    opacity: 1;
     transition: .3s;
     
     display: flex;
@@ -312,7 +319,7 @@
 .date-char-vertical-p {
     position: absolute;
     bottom: 10px;
-    left: -5px;
+    left: -3px;
 
     height: 20px;
     width: 50px;
@@ -323,4 +330,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#title-chart-year {
+    font-size: 20px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-column: 1 /span 12;
 }

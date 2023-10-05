@@ -6,8 +6,16 @@ import './Css/RightBox.css';
 import './Css/LeftBox.css';
 import './Css/navigationBar.css';
 
-//Modun//
-import { useState, useEffect, React } from 'react';
+//Modun react//
+import { useState, useEffect } from 'react';
+// eslint-disable-next-line
+import React from 'react';
+
+
+//component// //dùng React.lazy giúp chia nhỏ file js sau khi build -> tăng tốc độ load//
+const ItemFormDataBaseDiv = React.lazy(() => import('./components/ItemFromDataBaseDiv'));
+const NothingBox = React.lazy(() => import('./components/NothingBox'));
+const ChartBodyContainer = React.lazy(() => import('./components/ChartBox'));
 
 //
 const date = new Date();
@@ -16,126 +24,6 @@ const jsonDate = JSON.stringify(date);
 const year = jsonDate.slice(1, 5);
 const month = jsonDate.slice(6, 8); 
 const day = jsonDate.slice(9, 11);
-
-
-function ItemFormDataBaseDiv({ data }) {
-    
-    //toLocaleString("vi-VN") để định dạng 100000 thành 100.000//
-
-    return (
-        <div className='itemFormDataBaseDiv'>
-            <p className='idBox'>ID: {data._id}</p>
-
-            <p className='tradingNameText'>Trading Name</p>
-            <p className='tradingNameBox'>{data.TradingName}</p>
-
-            <p className='amountText'>Amount</p>    
-            <p className='amountBox'>{data.Amount.toLocaleString("vi-VN")} {data.Currency}</p>
-
-            <p className='datePurchaseText'>Date Purchase</p>
-            <p className='datePurchaseBox'>{data.date}</p>
-
-            <p className='dateInputText'>Date input</p>
-            <p className='dateInputBox'>{data.dateOfEntry}</p>
-        </div>
-    )
-};
-
-function NothingBox() {
-    return (
-        <div className='NothingBox-div'>
-            <img width="48" height="48" src="https://img.icons8.com/pulsar-color/48/nothing-found.png" alt="nothing-found" id='nothing-icon'/>
-            <p className='nothingText-p'>Hmm... Nothing To See Here</p>
-        </div>
-    )
-}
-
-
-
-//cột dọc//
-function ChartBoxVerticalColumn(props) {
-    let MaxValue = 0;
-    let indexValue = 0;
-
-    //tìm phần tử có amount lớn nhất//
-    props.dataResp.map((data, index) => {
-        if(data.Amount > MaxValue) MaxValue = data.Amount;
-        indexValue = index;
-        return 0;
-    })
-
-    const StyleChartBoxDiv = {
-        gridTemplateColumns: `repeat(${indexValue + 1}, 30px)`,
-    }
-
-    const html_char = props.dataResp.reverse().map((data, index) => {
-        return <div className='ColumnContainer-vertical-div'>
-            <div className='columnChartBox-vertical' key={`${data._id}${index}`} style={
-                {
-                    width: "90%",
-                    height: `${(data.Amount/MaxValue)*70}%`,
-                }}> <div className='TextContentChart-vertical-div'><p className='TextContentChart-p-vertical'>{data.Amount.toLocaleString("vi-VN")}</p></div>
-            </div>
-            <p className='date-char-vertical-p'>{data.month}-{data.year}</p>
-        </div>
-    })
-    //.reverse để đảo ngược thứ tự của element trong mảng item//
-    return (
-        <div className='chartBox-vertical-div' style={StyleChartBoxDiv}>
-            {html_char}
-        </div>
-    )
-}
-
-
-//cột ngang//
-//để nhận nhiều tham số thì dùng props//
-function ChartBoxHorizontalColumn(props) {
-    let MaxValue = 0;
-    let indexValue = 0;
-
-    //tìm phần tử có amount lớn nhất//
-    props.dataResp.map((data, index) => {
-        if(data.Amount > MaxValue) MaxValue = data.Amount;
-        indexValue = index;
-        return 0;
-    })
-
-    const StyleChartBoxDiv = {
-        gridTemplateRows: `repeat(${indexValue + 1}, 30px)`,
-    } 
-
-    const html_char = props.dataResp.map((data, index) => {
-        return <div className='ColumnContainer-div'>
-            <div className='columnChartBox' key={`${data._id}${index}`} style={
-                {
-                    height: "90%",
-                    width: `${(data.Amount/MaxValue)*60}%`,
-                }}> <div className='TextContentChart-div'><p className='TextContentChart-p'>{data.Amount.toLocaleString("vi-VN")}</p></div>
-            </div>
-            <p className='date-char-v-p'>{data.date}</p>
-        </div>
-    })
-
-    return (
-        <div className='chartBox-div' style={StyleChartBoxDiv}>
-            {html_char}
-        </div>
-    )
-}
-
-
-function ChartBodyContainer(props) {
-    return (
-        <div>
-            <ChartBoxHorizontalColumn dataResp={props.dataSpend}/>
-            <ChartBoxVerticalColumn dataResp={props.data12Month} />
-        </div>
-    )
-}
-
-
-
 
 
 function App() {
@@ -180,14 +68,12 @@ function App() {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        });
 
         Data = await Data.json();
         if(Data) {
             setTotalMoney(Data.FullSpend)
-            setRemainingMoney(Data.AccountBalance);
-            console.log(Data);
-            
+            setRemainingMoney(Data.AccountBalance);            
         }
     }
 
@@ -207,7 +93,7 @@ function App() {
             headers: {
                 'Content-Type': 'application/json'
             }        
-        })
+        });
         //đợi server trả về//
         DataBase = await DataBase.json();
         if(DataBase) {
@@ -310,7 +196,7 @@ function App() {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        });
 
         //nhận từ server//
         data = await data.json()
@@ -335,7 +221,7 @@ function App() {
             headers: {
                 'content-Type': 'application/json'
             }
-        })
+        });
 
         result = await result.json();
         if(result) {
@@ -356,7 +242,7 @@ function App() {
             headers: {
                 'content-Type': 'application/json'
             }
-        })
+        });
         result = await result.json();
         if(result) {
             console.log(result);
@@ -438,7 +324,7 @@ function App() {
                     <input type='submit' className='Submit-button' id='save' onClick={handleOnSubmit} value={"Submit"}/> 
                 </form>
 
-                <div className='CalcInformation-div'>
+                <div className='CalenderInformation-div'>
                     <h3 className='informationText-h3'>CALENDER</h3>
                     <iframe title='Calender' src="https://calendar.google.com/calendar/embed?src=lqm231231%40gmail.com&ctz=Asia%2FHo_Chi_Minh"></iframe>
 

@@ -2,7 +2,7 @@
     height: calc(100% - 61px);
     width: calc(30% - 62px);
   
-    background-color: antiquewhite;
+    background-color: white;
   
     position: absolute;
     right: 0px;
@@ -19,7 +19,6 @@
   height: 150px;
   width: 90%;
 
-  border: 1px solid black;
   border-radius: 10px;
 
   position: relative;
@@ -27,6 +26,8 @@
   left: 5%;
 
   background-color: white;
+  box-shadow: 3px 3px 10px 0px #555555;
+
 }
 .Form-box-form :nth-child(1) {
   height: 25px;
@@ -81,21 +82,23 @@
 
 
 
-.CalcInformation-div {
-  height: 500px;
+.CalenderInformation-div {
+  height: 460px;
   width: 90%;
 
-  border: 1px solid black;
   border-radius: 10px;
 
   position: relative;
-  top: 45px;
+  top: 30px;
   left: 5%;
 
   background-color: white;
+  box-shadow: 3px 3px 10px 0px #555555;
 }
 .informationText-h3 {
   text-align: center;
+  position: relative;
+  top: 10px;
 }
 
 /* Google calender */
@@ -107,8 +110,6 @@ iframe {
   position: relative;
   left: 5%;
 }
-
-
 
 
 .TotalInMonthBox-h2 {
@@ -123,7 +124,6 @@ iframe {
   height: 60px;
   width: 90%;
 
-  border: 1px solid black;
   border-radius: 10px;
 
   position: relative;
@@ -133,6 +133,7 @@ iframe {
   background-color: white;
 
   margin-bottom: 10px;
+  box-shadow: 3px 3px 10px 0px #555555;
 }
 
 .Total-h2 {
@@ -149,14 +150,14 @@ iframe {
   height: 60px;
   width: 90%;
 
-  border: 1px solid black;
   border-radius: 10px;
 
   position: relative;
-  top: 70px;
+  top: 80px;
   left: 5%;
 
   background-color: white;
+  box-shadow: 3px 3px 10px 0px #555555;
 }
 .Remaining-h2 {
   font-size: 25px;
