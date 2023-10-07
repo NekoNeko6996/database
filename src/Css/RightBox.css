@@ -1,18 +1,21 @@
+* {
+  --text-total: #FF3333;
+  --text-remaining: #33CC66 ;
+}
+
 .Right-Box-div {
-    height: calc(100% - 61px);
-    width: calc(30% - 62px);
-  
-    background-color: white;
-  
-    position: absolute;
-    right: 0px;
-    top: 61px;
+  height: calc(100% - 61px);
+  width: calc(30% - 62px);
 
-    overflow-y: scroll;
-    overflow-x: hidden;
+  background-color: white;
 
-    --text-total: brown;
-    --text-remaining: #009900;
+  position: absolute;
+  right: 0px;
+  top: 61px;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: var(--background-navigation-bar);
 }
 
 .Form-box-form {
@@ -25,9 +28,8 @@
   top: 20px;
   left: 5%;
 
-  background-color: white;
-  box-shadow: 3px 3px 10px 0px #555555;
-
+  background-color: var(--body-box-color);
+  box-shadow: 0 0 10px 0px #999999;
 }
 .Form-box-form :nth-child(1) {
   height: 25px;
@@ -35,6 +37,7 @@
 
   text-align: center;
   font-size: 20px;
+  color: var(--color-text-normal);
 
   position: absolute;
   left: 10px;
@@ -46,6 +49,7 @@
   position: absolute;
   top: 60px;
   left: 10px;
+  border-radius: 7px;
 }
 .Form-box-form :nth-child(3) {
   height: 25px;
@@ -54,6 +58,7 @@
   position: absolute;
   top: 60px;
   right: 10px;
+  border-radius: 7px;
 }
 .Form-box-form :nth-child(4) {
   height: 25px;
@@ -62,6 +67,7 @@
   position: absolute;
   top: 105px;
   left: 10px;
+  border-radius: 7px;
 }
 .Form-box-form :nth-child(5) {
   height: 28px;
@@ -70,16 +76,77 @@
   position: absolute;
   top: 105px;
   right: 10px;
+  border-radius: 7px;
 }
-.Form-box-form :nth-child(6) {
+
+/* ///////////////submit button/////////////// */
+.Submit-button {
   height: 31px;
   width: 85px;
 
   position: absolute;
   top: 105px;
-  left: 184px;
-}
+  left: 190px;
+  border-radius: 20px;
+  border-style: none;
+  transition: .5s;
 
+  overflow: hidden;
+} 
+.Submit-button::before {
+  content: 'Submit';
+  color: var(--color-text-normal);
+  font-weight: bold;
+  font-size: 15px;
+
+  /* chữ trong suốt */
+  mix-blend-mode: multiply;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 29px;
+  width: 83px;
+
+  position: absolute;
+  z-index: 2;
+  top: 1px;
+  left: 1px;
+
+  overflow: hidden;
+  border-radius: 20px;
+
+  background-color: var(--body-box-color);
+  transition: .5s;
+}
+.Submit-button::after {
+  content: '';
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 90px;
+  width: 90px;
+
+  position: absolute;
+  z-index: 1;
+  top: -30px;
+  left: -2px;
+
+  overflow: hidden;
+  border-radius: 50%;
+  background: rgb(255,81,55);
+  background: linear-gradient(45deg, rgba(255,81,55,1) 15%, rgba(255,243,63,1) 30%, rgba(46,255,84,1) 50%, rgba(95,117,255,1) 70%, rgba(255,68,254,1) 90%);
+  
+  transition: 1s;
+  transform-origin: center;
+}
+.Submit-button:hover::after {
+  transform: rotate(360deg);
+}
+/* ////////////////////////////////////// */
 
 
 .CalenderInformation-div {
@@ -92,10 +159,11 @@
   top: 30px;
   left: 5%;
 
-  background-color: white;
-  box-shadow: 3px 3px 10px 0px #555555;
+  background-color: var(--body-box-color);
+  box-shadow: 0 0 10px 0px #999999;
 }
 .informationText-h3 {
+  color: var(--color-text-normal);
   text-align: center;
   position: relative;
   top: 10px;
@@ -109,6 +177,7 @@ iframe {
 
   position: relative;
   left: 5%;
+  
 }
 
 
@@ -116,9 +185,9 @@ iframe {
   position: absolute;
   bottom: 0px;
   left: 20px;
+
+  color: var(--color-text-normal);
 }
-
-
 
 .TotalBox-div {
   height: 60px;
@@ -130,10 +199,10 @@ iframe {
   top: 70px;
   left: 5%;
 
-  background-color: white;
+  background-color: var(--body-box-color);
 
   margin-bottom: 10px;
-  box-shadow: 3px 3px 10px 0px #555555;
+  box-shadow: 0 0 10px 0px #999999;
 }
 
 .Total-h2 {
@@ -144,6 +213,7 @@ iframe {
   left: 20px;
 
   color: var(--text-total);
+  text-shadow: 0px 0px 10px var(--text-total);
 }
 
 .RemainingBox-div {
@@ -156,8 +226,8 @@ iframe {
   top: 80px;
   left: 5%;
 
-  background-color: white;
-  box-shadow: 3px 3px 10px 0px #555555;
+  background-color: var(--body-box-color);
+  box-shadow: 0 0 10px 0px #999999;
 }
 .Remaining-h2 {
   font-size: 25px;
@@ -167,4 +237,5 @@ iframe {
   left: 20px;
 
   color: var(--text-remaining);
+  text-shadow: 0 0 10px var(--text-remaining);
 }

@@ -1,3 +1,9 @@
+@import url('https://unpkg.com/css.gg@2.0.0/icons/css/mail.css');
+* {
+    --background-navigation-bar: #343746;
+    --icon-color: aliceblue;
+}
+
 .left-navigation-bar-div {
     height: calc(100% - 61px);
     width: 60px;
@@ -9,18 +15,44 @@
 
     display: flex;
     justify-content: center;
+
+    background-color: var(--background-navigation-bar);
+}
+.mail-link-a {
+    position: absolute;
 }
 
-.Mail-icon-img {
-    height: 50px;
-    width: 50px;
 
+/* //icon// */
+.gg-mail,
+.gg-mail::after {
+    display: block;
+    box-sizing: border-box;
+    height: 14px;
+    border: 2px solid
+}
+.gg-mail {
+    overflow: hidden;
+    transform: scale(var(--ggs,2));
     position: relative;
-    top: 20px;
-
-    transition: .1s;
+    width: 18px;
+    border-radius: 2px
 }
-.Mail-icon-img:hover {
+.gg-mail::after {
+    content: "";
+    position: absolute;
+    border-radius: 3px;
+    border-color: var(--icon-color);
+    width: 14px;
+    transform: rotate(-45deg);
+    bottom: 3px;
+    left: 0
+}
+.gg-mail {
+    top: 30px;
+    border-color: var(--icon-color);
+    transition: .3s;
+}
+.gg-mail:hover {
     scale: 1.1;
-    
 }

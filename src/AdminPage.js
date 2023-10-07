@@ -13,9 +13,9 @@ import React from 'react';
 
 
 //component// //dùng React.lazy giúp chia nhỏ file js sau khi build -> tăng tốc độ load//
-const ItemFormDataBaseDiv = React.lazy(() => import('./components/ItemFromDataBaseDiv'));
-const NothingBox = React.lazy(() => import('./components/NothingBox'));
-const ChartBodyContainer = React.lazy(() => import('./components/ChartBox'));
+const ItemFormDataBaseDiv = React.lazy(() => import('./components/ItemComponents'));
+const NothingBox = React.lazy(() => import('./components/NothingComponents'));
+const ChartBodyContainer = React.lazy(() => import('./components/ChartComponents'));
 
 //
 const date = new Date();
@@ -113,7 +113,7 @@ function App() {
     }, []);
 
 
-    const setHtmlItem = async (DataResp) => {
+    const setHtmlItem = async (DataResp, PageTag, Data12Month) => {
         if(DataResp) {
             let Sum = 0;
             if(DataResp.length !== 0) {
@@ -139,13 +139,11 @@ function App() {
     }
     //load item để hiển thị - reload hàm khi có sự kiện nhấn chuyển tag Page//
     useEffect(() => {
-       setHtmlItem(DataResp);
+       setHtmlItem(DataResp, PageTag, Data12Month);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[DataResp, PageTag, Data12Month]);
 
     
-
-
 
     //function chạy khi nhấn submit button//
     const handleOnSubmit = async (event) => {
@@ -201,7 +199,6 @@ function App() {
         //nhận từ server//
         data = await data.json()
         if(data) {
-            console.log(data);
             setNameGiver("");
             setAmountReceive("");
             setDateReceive("");
@@ -245,7 +242,6 @@ function App() {
         });
         result = await result.json();
         if(result) {
-            console.log(result);
             setData12Month(result);
         }
     }
@@ -291,12 +287,12 @@ function App() {
                 </div>
 
                 <div></div>
-                <button className='Reload-button' id='reload' onClick={DataBaseLoad}>Reload Data</button>
+                <button className='Reload-button' id='reload' onClick={DataBaseLoad}></button>
             </div>
 
             <div className='left-navigation-bar-div'>
-                <a href='https://mail.google.com/mail/' target='_blank' rel="noreferrer">
-                    <img className='Mail-icon-img' src='https://www.thewindowsclub.com/wp-content/uploads/2020/10/Gmail-Logo.png' alt='loadErr'/>
+                <a href='https://mail.google.com/mail/' target='_blank' rel="noreferrer" className='mail-link-a'>
+                    <i class="gg-mail"></i>
                 </a>
             </div>
 
@@ -321,7 +317,7 @@ function App() {
                     <input type='text' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)}/>
                     <input type='type' placeholder='Currency...' value={Currency} onChange={(event) => setCurrency(event.target.value)}/>
                     <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)}/>
-                    <input type='submit' className='Submit-button' id='save' onClick={handleOnSubmit} value={"Submit"}/> 
+                    <button className='Submit-button' id='save' onClick={handleOnSubmit}></button>
                 </form>
 
                 <div className='CalenderInformation-div'>

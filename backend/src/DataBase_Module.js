@@ -1,19 +1,22 @@
+//
+require('dotenv').config({ path: '../local.env' });
+
 //Module//
 const Math_Module = require('./Math_Module');
 
+
 //biến môi trường//
-const uri = 'mongodb+srv://nhnamAdmin1:Namvip93817@cluster0.rk9dttt.mongodb.net/';
+const uri = process.env.DB_URI || 'localhost';
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(uri);
 //
-const NameDataBase = 'Data_Store';
+const NameDataBase = process.env.DB_NAME || 'local';
 //
 const today = new Date();
 const getdate = JSON.stringify(today).slice(1, 11);
 const year = getdate.slice(0, 4);
 const month = getdate.slice(5, 7);
 //const day = getdate.slice(8, 10);
-
 
 
 //update data base//
@@ -80,7 +83,7 @@ module.exports.DataBase = async function(Document, type, TimeFilter) {
             case "MonthlyDataAggregation":
                 const result_Month_raw = await Read(DataBaseClient, "Spend_Data",
                     {
-                        date: { $gte: TimeFilter.since, $lt: TimeFilter.toDate },
+                        date: { $gte: TimeFilter.since },
                     })
 
                 const result_Month_after_calculate = await Math_Module.SumDataAmount(result_Month_raw);

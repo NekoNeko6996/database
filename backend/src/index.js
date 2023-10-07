@@ -6,17 +6,20 @@ const Math_Module = require('./Math_Module');
 const express = require('express');
 const app = express();
 const cors = require("cors");
+require('dotenv').config({ path : '../local.env'});
 
-//cổng giao tiếp//
-const PORT = 8000;
 
-console.log(`App listen at port ${PORT}`);
+const connection = {
+    PORT: process.env.PORT
+}
+
+console.log(`App listen at port ${connection.PORT}`);
 
 app.use(express.json());
 app.use(cors());
 app.get("/", (req, resp) => {
 
-	resp.send("App is Working");
+	resp.send("App is Working"); 
 	// You can check backend is working or not by
 	// entering http://loacalhost:8000
 	
@@ -122,4 +125,4 @@ app.post('/MonthDataInYearRequest', async (req, resp) => {
 
 
 //port server//
-app.listen(PORT);
+app.listen(connection.PORT);
