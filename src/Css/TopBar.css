@@ -87,7 +87,18 @@
   transform-origin: center;
 }
 .Reload-button:hover::after {
-  transform: rotate(360deg);
+  animation: rotate 1s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    rotate: 0deg;
+  } 
+  50% {
+    rotate: 180deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
 }
 /* //////////////////////////////////////// */
 
@@ -218,7 +229,18 @@
   transition: 1s;
 }
 .searchSubmit-inputBtn:hover::after {
-  transform: rotate(360deg);
+  animation: rotate 1s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    rotate: 0deg;
+  } 
+  50% {
+    rotate: 180deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
 }
 
 .searchSubmit-inputBtn::before {

@@ -6,7 +6,7 @@ import './Css/RightBox.css';
 import './Css/LeftBox.css';
 import './Css/navigationBar.css';
 
-//Modun react//
+//Module react//
 import { useState, useEffect } from 'react';
 // eslint-disable-next-line
 import React from 'react';
@@ -303,6 +303,10 @@ function App() {
                     <input type='submit' className='ReceiveSubmit-button' onClick={SubmitReceive} value={"Submit"}/>
                     <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
                 </form>
+                <div className='user-box'>
+                    <img className='user-img-avatar' src='https://i.pinimg.com/originals/86/dd/bb/86ddbb9654b59b76257867031c864407.jpg' alt='load err'/>
+                    <p className='user-name-p'>Nguyễn Hoàng Nam</p>
+                </div>
             </div>
 
             <div className='body-box-div'>
