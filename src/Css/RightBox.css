@@ -1,6 +1,8 @@
 * {
-  --text-total: #FF3333;
-  --text-remaining: #33CC66 ;
+  --text-total-color: #FF3333;
+  --text-remaining-color: #33CC66;
+  --box-shadow-color: #999999;
+  --box-shadow: 0 0 5px var(--box-shadow-color);
 }
 
 .Right-Box-div {
@@ -29,7 +31,7 @@
   left: 5%;
 
   background-color: var(--body-box-color);
-  box-shadow: 0 0 10px 0px #999999;
+  box-shadow: var(--box-shadow);
 }
 .Form-box-form :nth-child(1) {
   height: 25px;
@@ -160,7 +162,7 @@
   left: 5%;
 
   background-color: var(--body-box-color);
-  box-shadow: 0 0 10px 0px #999999;
+  box-shadow: var(--box-shadow);
 }
 .informationText-h3 {
   color: var(--color-text-normal);
@@ -202,7 +204,7 @@ iframe {
   background-color: var(--body-box-color);
 
   margin-bottom: 10px;
-  box-shadow: 0 0 10px 0px #999999;
+  box-shadow: var(--box-shadow);
 }
 
 .Total-h2 {
@@ -212,8 +214,8 @@ iframe {
   bottom: -5px;
   left: 20px;
 
-  color: var(--text-total);
-  text-shadow: 0px 0px 10px var(--text-total);
+  color: var(--text-total-color);
+  text-shadow: 0px 0px 10px var(--text-total-color);
 }
 
 .RemainingBox-div {
@@ -227,7 +229,7 @@ iframe {
   left: 5%;
 
   background-color: var(--body-box-color);
-  box-shadow: 0 0 10px 0px #999999;
+  box-shadow: var(--box-shadow);
 }
 .Remaining-h2 {
   font-size: 25px;
@@ -236,6 +238,6 @@ iframe {
   bottom: -5px;
   left: 20px;
 
-  color: var(--text-remaining);
-  text-shadow: 0 0 10px var(--text-remaining);
+  color: var(--text-remaining-color);
+  text-shadow: 0 0 10px var(--text-remaining-color);
 }

@@ -47,7 +47,7 @@ function App() {
     //
     const [NameGiver, setNameGiver] = useState("");
     const [AmountReceive, setAmountReceive] = useState("");
-    const [DateReceive, setDateReceive] = useState("");
+    const [DateReceive, setDateReceive] = useState(`${year}-${month}-${day}`);
     //
     const [SearchString, setSearchString] = useState("");
     //
@@ -201,7 +201,6 @@ function App() {
         if(data) {
             setNameGiver("");
             setAmountReceive("");
-            setDateReceive("");
         }
     }
 
@@ -227,7 +226,7 @@ function App() {
     }
 
 
-    //lấy dữ liệu của tháng//
+    //lấy dữ liệu của tháng// 
     const MonthDataInYearRequest = async () => {
         let result = await fetch(
             'http://localhost:8000/MonthDataInYearRequest', {
@@ -275,7 +274,7 @@ function App() {
                 <div>
                     <form action='' className='searchBox-form'>  
                         <input type='text' placeholder='Search something...'className='searchInput-input' value={SearchString} onChange={(event) => setSearchString(event.target.value)}/>
-                        <input type='submit' value={"Search"} className='searchSubmit-inputBtn' onClick={SearchRequest}/>
+                        <button value={"Search"} className='searchSubmit-inputBtn' onClick={SearchRequest}></button>
                     </form>
                 </div>
 

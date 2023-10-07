@@ -5,17 +5,17 @@
     height: calc(100% - 61px);
     width: 300px;
 
-    border-right: 1px solid black;
+    border-right: 1px solid var(--color-text-normal);
 
     transition: .5s;
 
-    background-color: white;
+    background-color: var(--background-navigation-bar);
 
     z-index: 10;
 }
 
 #LeftBox-close {
-    transform: translateX(-300px);
+    transform: translateX(-301px);
 }
 #LeftBox-open {
     transform: translateX(0px);
@@ -32,6 +32,9 @@
     font-size: 18px;
 
     margin-bottom: 10px;
+
+    border: none;
+    border-radius: 5px;
 }
 .InputReceive-input {
     height: 30px;
@@ -43,14 +46,20 @@
     font-size: 18px;
 
     margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+
 }
 
 .DateReceive-box {
-    height: 25px;
+    height: 30px;
     font-size: 15px;
 
     position: relative;
     right: -40px;
+    border: none;
+    border-radius: 5px;
+
 }
 .ReceiveSubmit-button {
     height: 30px;
@@ -59,4 +68,11 @@
 
     position: relative;
     left: 20px;
+    border: none;
+    border-radius: 5px;
+
+}
+
+.ReceiveText-h2 {
+    color: var(--color-text-normal);
 }

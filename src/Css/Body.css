@@ -3,7 +3,6 @@
     --chart-column-color: #009966;
     --body-box-color: #282A36;
     --scroll-bar-thumb-color: #786A86;
-    --box-shadow-color: #999999;
     /* chart */
     --border-color-chart-hover: #33CC33;
     --background-color-chart: #343746;
@@ -40,7 +39,7 @@
     border-radius: 20px;
 }
 .itemFormDataBaseDiv:hover {
-    border: 2px solid var(--text-remaining);
+    border: 2px solid var(--text-remaining-color);
 }
 
 .idBox {
