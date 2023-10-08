@@ -16,6 +16,11 @@ import React from 'react';
 const ItemFormDataBaseDiv = React.lazy(() => import('./components/ItemComponents'));
 const NothingBox = React.lazy(() => import('./components/NothingComponents'));
 const ChartBodyContainer = React.lazy(() => import('./components/ChartComponents'));
+const CalenderBox = React.lazy(() => import('./components/CalenderBox'));
+const TotalBox = React.lazy(() => import('./components/TotalBox'));
+const RemainingBox = React.lazy(() => import('./components/RemainingBox'));
+const BodyBox = React.lazy(() => import('./components/BodyBox'));
+const NavigationBar = React.lazy(() => import('./components/NavigationBar'));
 
 //
 const date = new Date();
@@ -245,7 +250,6 @@ function App() {
         }
     }
 
-
     //đống mở left box//
     const onButtonHideClick = () => {
         const LeftBox = document.querySelector('.LeftBox-div');
@@ -289,11 +293,7 @@ function App() {
                 <button className='Reload-button' id='reload' onClick={DataBaseLoad}></button>
             </div>
 
-            <div className='left-navigation-bar-div'>
-                <a href='https://mail.google.com/mail/' target='_blank' rel="noreferrer" className='mail-link-a'>
-                    <i class="gg-mail"></i>
-                </a>
-            </div>
+            <NavigationBar />
 
             <div className='LeftBox-div' id='LeftBox-close'>
                 <form action=''> 
@@ -309,9 +309,7 @@ function App() {
                 </div>
             </div>
 
-            <div className='body-box-div'>
-                {ItemHtml}
-            </div>
+            <BodyBox ItemHtml={ItemHtml}/>
 
             <div className='Right-Box-div'>
                 <form action='' className='Form-box-form'>
@@ -322,26 +320,11 @@ function App() {
                     <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)}/>
                     <button className='Submit-button' id='save' onClick={handleOnSubmit}></button>
                 </form>
-
-                <div className='CalenderInformation-div'>
-                    <h3 className='informationText-h3'>CALENDER</h3>
-                    <iframe title='Calender' src="https://calendar.google.com/calendar/embed?src=lqm231231%40gmail.com&ctz=Asia%2FHo_Chi_Minh"></iframe>
-
-
-
-                    <h2 className='TotalInMonthBox-h2'>Total in Month: {TotalMoneyInMonth.toLocaleString("vi-VN")} VND</h2>    
-                </div>
-
-                <div className='TotalBox-div'>
-                    <h2 className='Total-h2'>Total: {TotalMoney.toLocaleString("vi-VN")} VND</h2>
-                </div>
-
-                <div className='RemainingBox-div'>
-                    <h2 className='Remaining-h2'>Remaining: {RemainingMoney.toLocaleString("vi-VN")} VND</h2>
-                </div>
+                <CalenderBox TotalMoneyInMonth={TotalMoneyInMonth}/>
+                <TotalBox TotalMoney={TotalMoney}/>                
+                <RemainingBox RemainingMoney={RemainingMoney}/>    
             </div>
         </>
     );
 }
-
 export default App;
