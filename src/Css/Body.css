@@ -238,6 +238,7 @@
 }
 .columnChartBox:hover {
     border: 3px solid var(--border-color-chart-hover) !important;
+    
 }
 
 
