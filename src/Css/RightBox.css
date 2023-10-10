@@ -33,7 +33,7 @@
   background-color: var(--body-box-color);
   box-shadow: var(--box-shadow);
 }
-.Form-box-form :nth-child(1) {
+.add-purchase-text-h1 {
   height: 25px;
   width: calc(100%  - 20px);
 
@@ -44,7 +44,7 @@
   position: absolute;
   left: 10px;
 }
-.Form-box-form :nth-child(2) {
+.trading-name-input {
   height: 25px;
   width: 250px;
 
@@ -53,31 +53,43 @@
   left: 10px;
   border-radius: 7px;
 }
-.Form-box-form :nth-child(3) {
+.spend-amount-input {
   height: 25px;
   width: 160px;
-
+  
   position: absolute;
   top: 60px;
   right: 10px;
   border-radius: 7px;
 }
-.Form-box-form :nth-child(4) {
-  height: 25px;
-  width: 160px;
+.currency-select {
+  height: 30px;
+  width: 100px;
 
   position: absolute;
   top: 105px;
   left: 10px;
   border-radius: 7px;
+
+  font-size: 18px;
+  text-align: center;
 }
-.Form-box-form :nth-child(5) {
+.spend-date-input {
   height: 28px;
-  width: 160px;
+  width: 105px;
 
   position: absolute;
-  top: 105px;
-  right: 10px;
+  top: 104px;
+  left: 120px;
+  border-radius: 7px;
+}
+.spend-tag-select {
+  height: 26px;
+  width: 105px;
+
+  position: absolute;
+  top: 104px;
+  left: 240px;
   border-radius: 7px;
 }
 
@@ -88,7 +100,7 @@
 
   position: absolute;
   top: 105px;
-  left: 190px;
+  right: 12px;
   border-radius: 20px;
   border-style: none;
   transition: .5s;

@@ -184,7 +184,7 @@
 }
 .searchInput-input {
   height: 43px;
-  width: 557px;
+  width: 550px;
 
   position: relative;
   top: 0;
@@ -200,6 +200,7 @@
   outline: none;
   background-color: var(--background-navigation-bar);
 }
+
 .searchSubmit-inputBtn {
   height: 35px;
   width: 70px;

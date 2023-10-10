@@ -31,7 +31,6 @@ async function UpdateDataBase(Client, Collection, filterValue, Document) {
 //thêm dữ liệu vào data base//
 async function Add(Client, Collection, Document) {
     Document.Amount = await parseInt(Document.Amount);
-    
     await Client.collection(Collection).insertOne(Document);
 }
 

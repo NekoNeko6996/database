@@ -21,10 +21,12 @@ module.exports.ConversionStringToObject = async (Data) => {
         switch(name) {
             case 'date':
                 return { date: value };
-            case 'TradingName':
+            case 'tradingname':
                 return { TradingName: value };
-            case 'Amount':
+            case 'amount':
                 return { Amount: parseInt(value) };
+            case 'spendtag':
+                return { SpendTag: value };
                 
             default:
                 break;

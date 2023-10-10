@@ -35,8 +35,9 @@ function App() {
     //tạo biến useState để lưu thông tin đầu vào//
     const [TradingName, setTradingName] = useState("");
     const [Amount, setAmount] = useState();
-    const [Currency, setCurrency] = useState("");
+    const [Currency, setCurrency] = useState("VND");
     const [DatePurchase, setDatePurchase] = useState("");
+    const [SpendTag, setSpendTag] = useState("");
     //
     const [DataResp, setDataResp] = useState();
     const [Data12Month, setData12Month] = useState([]);
@@ -51,7 +52,7 @@ function App() {
     const [ToDate, setToDate] = useState(`${year}-${month}-${day}`);
     //
     const [NameGiver, setNameGiver] = useState("");
-    const [AmountReceive, setAmountReceive] = useState("");
+    const [AmountReceive, setAmountReceive] = useState();
     const [DateReceive, setDateReceive] = useState(`${year}-${month}-${day}`);
     //
     const [SearchString, setSearchString] = useState("");
@@ -160,7 +161,7 @@ function App() {
             method: "post",
             body: JSON.stringify(
                 {
-                    title: 'SaveSpend',
+                    SpendTag,
                     TradingName, 
                     Amount, 
                     Currency, 
@@ -277,7 +278,7 @@ function App() {
 
                 <div>
                     <form action='' className='searchBox-form'>  
-                        <input type='text' placeholder='Search something...'className='searchInput-input' value={SearchString} onChange={(event) => setSearchString(event.target.value)}/>
+                        <input type='search' placeholder='Search something...'className='searchInput-input' value={SearchString} onChange={(event) => setSearchString(event.target.value)}/>
                         <button value={"Search"} className='searchSubmit-inputBtn' onClick={SearchRequest}></button>
                     </form>
                 </div>
@@ -299,7 +300,7 @@ function App() {
                 <form action=''> 
                     <h2 className='ReceiveText-h2'>Receive</h2>
                     <input type='text' placeholder='Name giver...' value={NameGiver} onChange={(event) => setNameGiver(event.target.value)} className='InputNameGiver-input'/>
-                    <input type='text' placeholder='Amount receive...' value={AmountReceive} onChange={(event) => setAmountReceive(event.target.value)} className='InputReceive-input'/>
+                    <input type='number' placeholder='Amount receive...' value={AmountReceive} onChange={(event) => setAmountReceive(event.target.value)} className='InputReceive-input'/>
                     <input type='submit' className='ReceiveSubmit-button' onClick={SubmitReceive} value={"Submit"}/>
                     <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
                 </form>
@@ -313,11 +314,21 @@ function App() {
 
             <div className='Right-Box-div'>
                 <form action='' className='Form-box-form'>
-                    <h1>Add Purchase to Data Base</h1>
-                    <input type='text' placeholder='Trading Name...' value={TradingName} onChange={(event) => setTradingName(event.target.value)}/>
-                    <input type='text' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)}/>
-                    <input type='type' placeholder='Currency...' value={Currency} onChange={(event) => setCurrency(event.target.value)}/>
-                    <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)}/>
+                    <h1 className='add-purchase-text-h1'>Add Purchase to Data Base</h1>
+                    <input type='text' placeholder='Trading Name...' value={TradingName} onChange={(event) => setTradingName(event.target.value)} className='trading-name-input'/>
+                    <input type='number' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)} className='spend-amount-input'/>
+                    <select name='tag-select' className='currency-select'value={Currency} onChange={(event) => setCurrency(event.target.value)}>
+                        <option value={'VND'}>VND</option>
+                        <option value={'USD'}>USD</option>
+                    </select>
+                    <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)} className='spend-date-input'/>
+                    
+                    <input type='text' placeholder='tag...' className='spend-tag-select' list='spend-tag-list-id' value={SpendTag} onChange={(event) => setSpendTag(event.target.value)}/>
+                    <datalist id='spend-tag-list-id'>
+                        <option value={'tuition'}>Học phí</option>
+                        <option value={'cost-of-living'}>Sinh hoạt phí</option>
+                        <option value={'different'}>Khác</option>
+                    </datalist>
                     <button className='Submit-button' id='save' onClick={handleOnSubmit}></button>
                 </form>
                 <CalenderBox TotalMoneyInMonth={TotalMoneyInMonth}/>
