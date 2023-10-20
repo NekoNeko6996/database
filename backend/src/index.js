@@ -123,6 +123,17 @@ app.post('/MonthDataInYearRequest', async (req, resp) => {
     }
 })
 
+//delete//
+app.post('/delete_item', async(req, resp) => {
+    try {
+        console.log(req.body.itemID);
+        await DataBase_Module.DataBase("", "delete", "", req.body.itemID);
+        resp.send(JSON.stringify({date: new Date()}));
+    } catch(e) {
+        console.log(e);
+    }
+})
+
 
 //port server//
 app.listen(connection.PORT);

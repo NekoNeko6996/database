@@ -1,8 +1,11 @@
 import React from "react";
+//
+import { delete_item } from '../js/module.js';
 
 //box hiện item//
 function ItemFormDataBaseDiv({ data }) {
     console.log('render: item');
+
     //toLocaleString("vi-VN") để định dạng 100000 thành 100.000//
     return (
         <div className='itemFormDataBaseDiv'>
@@ -14,7 +17,7 @@ function ItemFormDataBaseDiv({ data }) {
             <p className='amountText'>Amount</p>    
             <p className='amountBox'>{data.Amount.toLocaleString("vi-VN")} {data.Currency}</p>
 
-            <img width="32" height="32" src="https://img.icons8.com/office/32/cancel.png" alt="cancel" id="delete-icon"/>
+            <img width="32" height="32" src="https://img.icons8.com/office/32/cancel.png" alt="cancel" id="delete-icon" onClick={() => delete_item(data._id)}/>
 
             <p className='datePurchaseText'>Date Purchase</p>
             <p className='datePurchaseBox'>{data.date}</p>

@@ -7,7 +7,7 @@ const Math_Module = require('./Math_Module');
 
 //biến môi trường//
 const uri = process.env.DB_URI || 'localhost';
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const client = new MongoClient(uri);
 //
 const NameDataBase = process.env.DB_NAME || 'local';
@@ -41,10 +41,16 @@ async function Read(Client, Collection, Condition, Limit) {
     const result = await cursor.toArray();
     return result;
 }
-
+//
+async function Delete(Client, Collection, id) {
+    await Client.collection(Collection).deleteOne({ _id: new ObjectId(id) }, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+    });
+}
 
 //kết nối đến data base//
-module.exports.DataBase = async function(Document, type, TimeFilter) {
+module.exports.DataBase = async function(Document, type, TimeFilter, id) {
     try {
         await client.connect();
         const DataBaseClient = await client.db(NameDataBase);
@@ -120,6 +126,9 @@ module.exports.DataBase = async function(Document, type, TimeFilter) {
                 const Data12Month = await Read(DataBaseClient, 'Data_Month', {}, 12);
                 return Data12Month;
             default:
+                break;
+            case 'delete':
+                await Delete(DataBaseClient, 'Spend_Data', id);
                 break;
         }
     } catch (e) {
