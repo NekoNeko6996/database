@@ -41,7 +41,17 @@
 .itemFormDataBaseDiv:hover {
     border: 2px solid var(--text-remaining-color);
 }
-
+/* ////////icon delete/////////// */
+#delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+}
+.itemFormDataBaseDiv:hover #delete-icon {
+    opacity: 1;
+}
+/* /////////////////////////////// */
 .idBox {
     width: auto;
     max-width: 40%;
@@ -387,3 +397,4 @@
     background-color: var(--scroll-bar-thumb-color);
     
 }
+
