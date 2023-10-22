@@ -5,11 +5,14 @@ import './Css/Body.css';
 import './Css/RightBox.css';
 import './Css/LeftBox.css';
 import './Css/navigationBar.css';
+import './Css/loadingBox.css';
 
 //Module react//
 import { useState, useEffect } from 'react';
 // eslint-disable-next-line
 import React from 'react';
+//better alert -- SweetAlert//
+import swal from 'sweetalert';
 
 
 //component// //dùng React.lazy giúp chia nhỏ file js sau khi build -> tăng tốc độ load//
@@ -21,6 +24,7 @@ const TotalBox = React.lazy(() => import('./components/TotalBox'));
 const RemainingBox = React.lazy(() => import('./components/RemainingBox'));
 const BodyBox = React.lazy(() => import('./components/BodyBox'));
 const NavigationBar = React.lazy(() => import('./components/NavigationBar'));
+const LoadingBox = React.lazy(() => import('./components/loadingBox'));
 
 //
 const date = new Date();
@@ -36,13 +40,13 @@ function App() {
     const [TradingName, setTradingName] = useState("");
     const [Amount, setAmount] = useState();
     const [Currency, setCurrency] = useState("VND");
-    const [DatePurchase, setDatePurchase] = useState("");
+    const [DatePurchase, setDatePurchase] = useState(`${year}-${month}-${day}`);
     const [SpendTag, setSpendTag] = useState("");
     //
     const [DataResp, setDataResp] = useState();
     const [Data12Month, setData12Month] = useState([]);
     //
-    const [ItemHtml, setItemHtml] = useState([]);
+    const [ItemHtml, setItemHtml] = useState([<LoadingBox key={'loadingBox'} />]);
     //
     const [TotalMoneyInMonth, setTotalMoneyInMonth] = useState(0);
     const [TotalMoney, setTotalMoney] = useState(0);
@@ -107,8 +111,6 @@ function App() {
             setDataResp(DataBase);
         }
     }
-    //sữ dụng useEffect() để gọi khi load component lần đầu tiên//
-    //khắc phụ lỗi request 2 lần//
     useEffect(() => {
         DataBaseLoad();
         fullSpendAndBalanceRequest();
@@ -146,7 +148,6 @@ function App() {
     //load item để hiển thị - reload hàm khi có sự kiện nhấn chuyển tag Page//
     useEffect(() => {
        setHtmlItem(DataResp, PageTag, Data12Month);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[DataResp, PageTag, Data12Month]);
 
     
@@ -154,6 +155,19 @@ function App() {
     //function chạy khi nhấn submit button//
     const handleOnSubmit = async (event) => {
         event.preventDefault();
+
+        if(!TradingName) {
+            swal( "Hmm... Something's not right here", "You need to enter TradingName!", "warning");
+            return 0;
+        }
+        if(!Amount) {
+            swal( "Hmm... Something's not right here", "You need to enter Amount!", "warning");
+            return 0;
+        }
+        if(!SpendTag) {
+            swal( "Hmm... Something's not right here", "You need to enter SpendTag!", "warning");
+            return 0;
+        }
 
         //gửi yêu cầu tạo người dùng đến sẻver//
         let result = await fetch(
@@ -178,6 +192,7 @@ function App() {
         if (result) {
             setTradingName("");
             setAmount("");
+            swal("Save Data", "Done!", "success");
         }
     }
 
@@ -185,6 +200,16 @@ function App() {
     //
     const SubmitReceive = async (event) => {
         event.preventDefault();
+
+        if(!NameGiver) {
+            swal( "Hmm... Something's not right here", "You need to enter NameGiver!", "warning");
+            return 0;
+        }
+        if(!AmountReceive) {
+            swal( "Hmm... Something's not right here", "You need to enter Amount!", "warning");
+            return 0;
+        }
+
         //gửi đến server//
         let data = await fetch(
         'http://localhost:8000/SaveReceive', {
@@ -213,6 +238,8 @@ function App() {
     //gửi search request//
     const SearchRequest = async (event) => {
         event.preventDefault();
+        if(!SearchString) return 0;
+
         let result = await fetch(
         'http://localhost:8000/SearchRequest', {
             method: "post",
@@ -311,7 +338,7 @@ function App() {
             </div>
 
             <BodyBox ItemHtml={ItemHtml}/>
-
+            
             <div className='Right-Box-div'>
                 <form action='' className='Form-box-form'>
                     <h1 className='add-purchase-text-h1'>Add Purchase to Data Base</h1>

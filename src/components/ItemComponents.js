@@ -1,6 +1,6 @@
 import React from "react";
 //
-import { delete_item } from '../js/module.js';
+import { delete_item_alert } from '../js/Delete_item.js';
 
 //box hiện item//
 function ItemFormDataBaseDiv({ data }) {
@@ -17,7 +17,7 @@ function ItemFormDataBaseDiv({ data }) {
             <p className='amountText'>Amount</p>    
             <p className='amountBox'>{data.Amount.toLocaleString("vi-VN")} {data.Currency}</p>
 
-            <img width="32" height="32" src="https://img.icons8.com/office/32/cancel.png" alt="cancel" id="delete-icon" onClick={() => delete_item(data._id)}/>
+            <img width="32" height="32" src="https://img.icons8.com/office/32/cancel.png" alt="cancel" id="delete-icon" onClick={() => delete_item_alert(data._id)}/>
 
             <p className='datePurchaseText'>Date Purchase</p>
             <p className='datePurchaseBox'>{data.date}</p>
