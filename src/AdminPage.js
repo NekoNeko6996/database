@@ -34,7 +34,6 @@ const year = jsonDate.slice(1, 5);
 const month = jsonDate.slice(6, 8); 
 const day = jsonDate.slice(9, 11);
 
-
 function App() {
     //tạo biến useState để lưu thông tin đầu vào//
     const [TradingName, setTradingName] = useState("");
@@ -67,7 +66,7 @@ function App() {
     //full load để lấy tổng tiền đã dùng và số tiền còn lại//
     const fullSpendAndBalanceRequest = async () => {
         let Data = await fetch(
-        'http://localhost:8000/fullSpendAndBalanceRequest', {
+        ' http://localhost:8000/fullSpendAndBalanceRequest', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -91,7 +90,7 @@ function App() {
     //request để load dữ liệu hiển thị//
     const DataBaseLoad = async () => {
         let DataBase = await fetch(
-        'http://localhost:8000/onloadRequest', {
+        ' http://localhost:8000/onloadRequest', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -171,7 +170,7 @@ function App() {
 
         //gửi yêu cầu tạo người dùng đến sẻver//
         let result = await fetch(
-        'http://localhost:8000/SaveSpend', {
+        ' http://localhost:8000/SaveSpend', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -212,7 +211,7 @@ function App() {
 
         //gửi đến server//
         let data = await fetch(
-        'http://localhost:8000/SaveReceive', {
+        ' http://localhost:8000/SaveReceive', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -241,7 +240,7 @@ function App() {
         if(!SearchString) return 0;
 
         let result = await fetch(
-        'http://localhost:8000/SearchRequest', {
+        ' http://localhost:8000/SearchRequest', {
             method: "post",
             body: JSON.stringify({
                 title: "searchRequest",
@@ -262,7 +261,7 @@ function App() {
     //lấy dữ liệu của tháng// 
     const MonthDataInYearRequest = async () => {
         let result = await fetch(
-            'http://localhost:8000/MonthDataInYearRequest', {
+            ' http://localhost:8000/MonthDataInYearRequest', {
             method: "post",
             body: JSON.stringify({
                 title: "dataInMonthRequest",
@@ -285,7 +284,7 @@ function App() {
             LeftBox.id = 'LeftBox-open';
         } else {
             LeftBox.id = 'LeftBox-close';
-        }
+        }   
         console.log(LeftBox.id);
     }
 
@@ -303,65 +302,70 @@ function App() {
                     </select>
                 </div>
 
-                <div>
+                <div id='container-search-box'>
                     <form action='' className='searchBox-form'>  
                         <input type='search' placeholder='Search something...'className='searchInput-input' value={SearchString} onChange={(event) => setSearchString(event.target.value)}/>
-                        <button value={"Search"} className='searchSubmit-inputBtn' onClick={SearchRequest}></button>
+                        <div id='button-search-top-bar'><button value={"Search"} className='button-rainbow' onClick={SearchRequest}></button></div>
                     </form>
                 </div>
 
+
                 <div className='Since-ToDateBox-div'>
                     <p className='SinceText-p'>Since</p>
-                    <input type='date' value={Since} onChange={(event) => setSince(JSON.stringify(event.target.value).slice(1, 11))} className='dateSince-input'/>
                     <p className='ToDateText-p'>To Date</p>
+                    <input type='date' value={Since} onChange={(event) => setSince(JSON.stringify(event.target.value).slice(1, 11))} className='dateSince-input'/>
                     <input type='date' value={ToDate} onChange={(event) => setToDate(JSON.stringify(event.target.value).slice(1, 11))} className='dateToDate-input'/>
+                    <div id='reload-box-btn'><button className='button-rainbow' id='reload' onClick={DataBaseLoad}></button></div>
                 </div>
 
                 <div></div>
-                <button className='Reload-button' id='reload' onClick={DataBaseLoad}></button>
+
             </div>
 
-            <NavigationBar />
+            {/* body */}
+            <div id='bodyContainer'>
+                <NavigationBar />
+                <div className='LeftBox-div' id='LeftBox-close'>
+                    <form action=''> 
+                        <h2 className='ReceiveText-h2'>Receive</h2>
+                        <input type='text' placeholder='Name giver...' value={NameGiver} onChange={(event) => setNameGiver(event.target.value)} className='InputNameGiver-input'/>
+                        <input type='number' placeholder='Amount receive...' value={AmountReceive} onChange={(event) => setAmountReceive(event.target.value)} className='InputReceive-input'/>
+                        <input type='submit' className='ReceiveSubmit-button' onClick={SubmitReceive} value={"Submit"}/>
+                        <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
+                    </form>
+                    <div className='user-box'>
+                        <img className='user-img-avatar' src='https://i.pinimg.com/originals/86/dd/bb/86ddbb9654b59b76257867031c864407.jpg' alt='load err'/>
+                        <p className='user-name-p'>Nguyễn Hoàng Nam</p>
+                    </div>
+                </div>
 
-            <div className='LeftBox-div' id='LeftBox-close'>
-                <form action=''> 
-                    <h2 className='ReceiveText-h2'>Receive</h2>
-                    <input type='text' placeholder='Name giver...' value={NameGiver} onChange={(event) => setNameGiver(event.target.value)} className='InputNameGiver-input'/>
-                    <input type='number' placeholder='Amount receive...' value={AmountReceive} onChange={(event) => setAmountReceive(event.target.value)} className='InputReceive-input'/>
-                    <input type='submit' className='ReceiveSubmit-button' onClick={SubmitReceive} value={"Submit"}/>
-                    <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
-                </form>
-                <div className='user-box'>
-                    <img className='user-img-avatar' src='https://i.pinimg.com/originals/86/dd/bb/86ddbb9654b59b76257867031c864407.jpg' alt='load err'/>
-                    <p className='user-name-p'>Nguyễn Hoàng Nam</p>
+                <BodyBox ItemHtml={ItemHtml}/>
+
+                <div className='Right-Box-div'>
+                    <form action='' className='Form-box-form'>
+                        <h1 className='add-purchase-text-h1'>Add Purchase to Data Base</h1>
+                        <input type='text' placeholder='Trading Name...' value={TradingName} onChange={(event) => setTradingName(event.target.value)} className='trading-name-input'/>
+                        <input type='number' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)} className='spend-amount-input'/>
+                        <select name='tag-select' className='currency-select'value={Currency} onChange={(event) => setCurrency(event.target.value)}>
+                            <option value={'VND'}>VND</option>
+                            <option value={'USD'}>USD</option>
+                        </select>
+                        <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)} className='spend-date-input'/>
+                        
+                        <input type='text' placeholder='tag...' className='spend-tag-select' list='spend-tag-list-id' value={SpendTag} onChange={(event) => setSpendTag(event.target.value)}/>
+                        <datalist id='spend-tag-list-id'>
+                            <option value={'tuition'}>Học phí</option>
+                            <option value={'cost-of-living'}>Sinh hoạt phí</option>
+                            <option value={'different'}>Khác</option>
+                        </datalist>
+                        <div id='submit-box-btn'><button className='button-rainbow' id='save' onClick={handleOnSubmit}></button></div>
+                    </form>
+                    <CalenderBox TotalMoneyInMonth={TotalMoneyInMonth}/>
+                    <TotalBox TotalMoney={TotalMoney}/>                
+                    <RemainingBox RemainingMoney={RemainingMoney}/>    
                 </div>
             </div>
-
-            <BodyBox ItemHtml={ItemHtml}/>
             
-            <div className='Right-Box-div'>
-                <form action='' className='Form-box-form'>
-                    <h1 className='add-purchase-text-h1'>Add Purchase to Data Base</h1>
-                    <input type='text' placeholder='Trading Name...' value={TradingName} onChange={(event) => setTradingName(event.target.value)} className='trading-name-input'/>
-                    <input type='number' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)} className='spend-amount-input'/>
-                    <select name='tag-select' className='currency-select'value={Currency} onChange={(event) => setCurrency(event.target.value)}>
-                        <option value={'VND'}>VND</option>
-                        <option value={'USD'}>USD</option>
-                    </select>
-                    <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)} className='spend-date-input'/>
-                    
-                    <input type='text' placeholder='tag...' className='spend-tag-select' list='spend-tag-list-id' value={SpendTag} onChange={(event) => setSpendTag(event.target.value)}/>
-                    <datalist id='spend-tag-list-id'>
-                        <option value={'tuition'}>Học phí</option>
-                        <option value={'cost-of-living'}>Sinh hoạt phí</option>
-                        <option value={'different'}>Khác</option>
-                    </datalist>
-                    <button className='Submit-button' id='save' onClick={handleOnSubmit}></button>
-                </form>
-                <CalenderBox TotalMoneyInMonth={TotalMoneyInMonth}/>
-                <TotalBox TotalMoney={TotalMoney}/>                
-                <RemainingBox RemainingMoney={RemainingMoney}/>    
-            </div>
         </>
     );
 }

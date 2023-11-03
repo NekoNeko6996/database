@@ -1,23 +1,11 @@
-* {
-    --text-color-id: #AAAAAA;
-    --chart-column-color: #009966;
-    --body-box-color: #282A36;
-    --scroll-bar-thumb-color: #786A86;
-    /* chart */
-    --border-color-chart-hover: #33CC33;
-    --background-color-chart: #343746;
-    --border-color-char-normal: #777777;
-}
-
 .body-box-div {
     height: calc(100% - 61px);
     width: 70%;
   
-    border-right: 1px solid black;
-    border-left: 1px solid black;
+    border-right: 1px solid var(--border-color-default);
+    border-left: 1px solid var(--border-color-default);
   
     position: absolute;
-    top: 61px;
     left: 60px;
 
     overflow-y: scroll;
@@ -37,6 +25,7 @@
 
     border: 2px solid var(--text-color-id);
     border-radius: 20px;
+    overflow-x: hidden;
 }
 .itemFormDataBaseDiv:hover {
     border: 2px solid var(--text-remaining-color);
@@ -142,6 +131,7 @@
 
     font-size: 20px;
     color: var(--color-text-normal);
+    
 }
 
 .NothingBox-div {

@@ -1,13 +1,7 @@
-* {
-  --text-total-color: #FF3333;
-  --text-remaining-color: #33CC66;
-  --box-shadow-color: #999999;
-  --box-shadow: 0 0 5px var(--box-shadow-color);
-}
-
 .Right-Box-div {
   height: calc(100% - 61px);
   width: calc(30% - 62px);
+  min-width: 400px;
 
   background-color: white;
 
@@ -18,162 +12,94 @@
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: var(--background-navigation-bar);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Form-box-form {
-  height: 150px;
+  min-height: 150px;
   width: 90%;
+  min-width: 370px;
 
   border-radius: 10px;
 
   position: relative;
   top: 20px;
-  left: 5%;
 
   background-color: var(--body-box-color);
   box-shadow: var(--box-shadow);
-}
-.add-purchase-text-h1 {
-  height: 25px;
-  width: calc(100%  - 20px);
 
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.add-purchase-text-h1 {
   text-align: center;
   font-size: 20px;
   color: var(--color-text-normal);
-
-  position: absolute;
-  left: 10px;
+  grid-column: 1/-1;
+  margin: 0;
+  align-self: center;
 }
+
 .trading-name-input {
   height: 25px;
-  width: 250px;
+  width: calc(100% - 30px);
+  justify-self: right;
 
-  position: absolute;
-  top: 60px;
-  left: 10px;
+  grid-column: 1 /span 2;
   border-radius: 7px;
 }
 .spend-amount-input {
   height: 25px;
-  width: 160px;
+  width: calc(100% - 30px);
+  justify-self: left;
   
-  position: absolute;
-  top: 60px;
-  right: 10px;
   border-radius: 7px;
+  grid-column: 3 /span 2;
 }
+
 .currency-select {
   height: 30px;
-  width: 100px;
-
-  position: absolute;
-  top: 105px;
-  left: 10px;
+  width: calc(100% - 25px);
   border-radius: 7px;
-
   font-size: 18px;
   text-align: center;
+  justify-self: right;
 }
 .spend-date-input {
-  height: 28px;
-  width: 105px;
-
-  position: absolute;
-  top: 104px;
-  left: 120px;
+  height: 27px;
+  width: calc(100% - 5px);
+  position: relative;
+  top: -1px;
   border-radius: 7px;
+  justify-self: left;
 }
 .spend-tag-select {
-  height: 26px;
-  width: 105px;
-
-  position: absolute;
-  top: 104px;
-  left: 240px;
+  height: 24px;
+  width: calc(100% - 6px);
   border-radius: 7px;
+  justify-content: right;
 }
+/* submit button */
+#submit-box-btn {
+  height: 27px;
+  width: calc(100% - 23px);
 
-/* ///////////////submit button/////////////// */
-.Submit-button {
-  height: 31px;
-  width: 85px;
-
-  position: absolute;
-  top: 105px;
-  right: 12px;
-  border-radius: 20px;
-  border-style: none;
-  transition: .5s;
-
-  overflow: hidden;
-} 
-.Submit-button::before {
-  content: 'Submit';
-  color: var(--color-text-normal);
-  font-weight: bold;
-  font-size: 15px;
-
-  /* chữ trong suốt */
-  mix-blend-mode: multiply;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 29px;
-  width: 83px;
-
-  position: absolute;
-  z-index: 2;
-  top: 1px;
-  left: 1px;
-
-  overflow: hidden;
-  border-radius: 20px;
-
-  background-color: var(--body-box-color);
-  transition: .5s;
-}
-.Submit-button::after {
-  content: '';
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 90px;
-  width: 90px;
-
-  position: absolute;
-  z-index: 1;
-  top: -30px;
-  left: -2px;
-
-  overflow: hidden;
-  border-radius: 50%;
-  background: rgb(255,81,55);
-  background: linear-gradient(45deg, rgba(255,81,55,1) 15%, rgba(255,243,63,1) 30%, rgba(46,255,84,1) 50%, rgba(95,117,255,1) 70%, rgba(255,68,254,1) 90%);
+  position: relative;
+  top: 2px;
   
-  transition: 1s;
-  transform-origin: center;
 }
-.Submit-button:hover::after {
-  animation: rotate 1s linear infinite;
+#submit-box-btn .button-rainbow::before {
+  content: 'Submit' !important;
 }
-@keyframes rotate {
-  0% {
-    rotate: 0deg;
-  } 
-  50% {
-    rotate: 180deg;
-  }
-  100% {
-    rotate: 360deg;
-  }
-}
+
+
 /* ////////////////////////////////////// */
-
-
 .CalenderInformation-div {
   height: 460px;
   width: 90%;
@@ -182,7 +108,6 @@
 
   position: relative;
   top: 30px;
-  left: 5%;
 
   background-color: var(--body-box-color);
   box-shadow: var(--box-shadow);
@@ -222,7 +147,6 @@ iframe {
 
   position: relative;
   top: 70px;
-  left: 5%;
 
   background-color: var(--body-box-color);
 
@@ -249,7 +173,6 @@ iframe {
 
   position: relative;
   top: 80px;
-  left: 5%;
 
   background-color: var(--body-box-color);
   box-shadow: var(--box-shadow);

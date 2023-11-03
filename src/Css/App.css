@@ -1,4 +1,193 @@
-.App {
-  text-align: center;
+:root {
+  /* * */
+  --border-color-default: black;
+
+  /* top bar */
+  --color-text-normal: white;
+  --color-Admin-text-h1: white;
+  --background-color: #1b1c24;
+
+  /* body */
+  --text-color-id: #AAAAAA;
+  --chart-column-color: #009966;
+  --body-box-color: #282A36;
+  --scroll-bar-thumb-color: #786A86;
+  /* chart */
+  --border-color-chart-hover: #33CC33;
+  --background-color-chart: #343746;
+  --border-color-char-normal: #777777;
+
+  /* navigation bar */
+  --background-navigation-bar: #343746;
+  --icon-color: aliceblue;
+
+  /* right box */
+  --text-total-color: #FF3333;
+  --text-remaining-color: #33CC66;
+  --box-shadow-color: #999999;
+  --box-shadow: 0 0 5px var(--box-shadow-color);
+
+  /* button rainbow */
+  --color-rainbow: linear-gradient(45deg, rgba(255,81,55,1) 15%, rgba(255,243,63,1) 30%, rgba(46,255,84,1) 50%, rgba(95,117,255,1) 70%, rgba(255,68,254,1) 90%);
+  --background-color-before: #343746;
+
+  
+}
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+#root {
+  position: relative;
+  overflow: hidden;
+
 }
 
+
+/* Button Style */
+.button-rainbow {
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+  z-index: 1;
+
+  border-radius: 20px;
+  border: none;
+
+  overflow: hidden;
+
+  cursor: pointer;
+}
+.button-rainbow::after {
+  content: '';
+  height: 105%;
+  width: 105%;
+
+  position: absolute;
+
+  background: var(--color-rainbow);
+  transform-origin: center;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.button-rainbow::before {
+  content: 'Search';
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
+
+  color: var(--color-text-normal);
+  font-weight: bold;
+
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  z-index: 4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--background-color-before);
+  border-radius: 20px;
+}
+/* body */
+#bodyContainer {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+
+
+/* //////////////////////////////////////////////////// */
+@media screen and (max-width: 1500px){
+  .TopBar-box-div {
+    grid-column-gap: 5px;
+    grid-template-columns: 2fr 5fr 5fr 21fr 9fr 3fr 3fr;
+  }
+} 
+@media screen and (max-width: 1290px){
+  .TopBar-box-div {
+    grid-column-gap: 5px;
+    grid-template-columns: 4fr 10fr 10fr 22fr 20fr 5fr;
+  }
+} 
+@media screen and (max-width: 850px) {
+  .TopBar-box-div {
+    grid-column-gap: 5px;
+    grid-template-columns: 4fr 10fr 10fr 22fr 5fr 10fr;
+  }
+  /* .Since-ToDateBox-div {
+    position: absolute;
+    top: 80px;
+    z-index: 10;
+    height: 60px;
+    width: 230px;
+
+    border: 1px solid red;
+  } */
+}
+@media screen and (max-width: 700px) {
+  .TopBar-box-div {
+    grid-column-gap: 5px;
+    grid-template-columns: 2fr 8fr 8fr 4fr !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  #container-search-box {
+    grid-column: 1 /span 4;
+  }
+  .Since-ToDateBox-div  {
+    grid-column: 1 / span 4;
+    grid-row: 3 /span 1;
+  }
+  .dateSince-input {
+    width: 110px !important;
+  }
+  .dateToDate-input {
+    width: 110px !important;
+  }
+  /* ////////////////////////////////////// */
+  .Right-Box-div {
+    transform: translateX(400px);
+  }
+  .left-navigation-bar-div {
+    transform: translateX(-60px);
+  }
+  /* ///////////////////////////////////// */
+  .body-box-div {
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+  }
+  .idBox, .datePurchaseText, .datePurchaseBox, .dateInputText, .dateInputBox{
+    display: none;
+  }
+  .itemFormDataBaseDiv {
+    height: 100px !important;
+  }
+  .tradingNameBox, .tradingNameText {
+    left: 10px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tradingNameText {
+    top: 15px !important;
+    font-size: 12px !important;
+  }
+  .tradingNameBox {
+    font-size: 20px !important;
+    width: 100px !important;
+    top: 30px !important;
+  }
+  .amountText {
+    left: 120px !important;
+  }
+  .amountBox {
+    font-size: 25px !important;
+    max-width: none !important;
+    left: 120px !important;
+    top: 25px !important;
+  }
+}

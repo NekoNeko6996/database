@@ -1,14 +1,10 @@
 @import url('https://unpkg.com/css.gg@2.0.0/icons/css/mail.css');
-* {
-    --background-navigation-bar: #343746;
-    --icon-color: aliceblue;
-}
 
 .left-navigation-bar-div {
     height: calc(100% - 61px);
     width: 60px;
 
-    position: relative;
+    position: absolute;
     top: 61px;
 
     overflow: hidden;

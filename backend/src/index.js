@@ -126,7 +126,7 @@ app.post('/MonthDataInYearRequest', async (req, resp) => {
 //delete//
 app.post('/delete_item', async(req, resp) => {
     try {
-        console.log(req.body.itemID);
+        console.log(req.body);
         await DataBase_Module.DataBase("", "delete", "", req.body.itemID);
         resp.send(JSON.stringify({date: new Date()}));
     } catch(e) {

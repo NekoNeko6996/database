@@ -1,155 +1,92 @@
-* {
-  --color-text-normal: white;
-  --color-Admin-text-h1: white;
-  --background-color: #1b1c24;
-}
-
 .TopBar-box-div {
+  width: 100vw;
+  /* height: 230px; */
   height: 60px;
-  width: 100%;
 
   border-bottom: 1px solid black;
 
   display: grid;
-  grid-template-columns: 90px 245px 200px auto 350px 25px 120px 20px;
+  grid-template-columns: 2fr 5fr 5fr 21fr 11fr 6fr;
   grid-template-rows: 60px;
-
-  position: absolute;
-  background-color: var(--background-color);
-}
-
-
-
-/* ////////////////////reload button//////////////////// */
-.Reload-button {
-  height: 50px;
-  width: 115px;
+  grid-gap: 20px;
 
   position: relative;
-  top: 5px;
-
-  overflow: hidden;
-
-  font-weight: bold;
-
-  border-radius: 20px;
-  border-style: none;
-}
-.Reload-button::before {
-  content: 'Reload Data';
-  color: var(--color-text-normal);
-  font-weight: bold;
-  font-size: 15px;
-
-  /* chữ trong suốt */
-  mix-blend-mode: multiply;
-
-  display: flex;
-  justify-content: center;
+  background-color: var(--background-color);
   align-items: center;
 
-  height: 48px;
-  width: 113px;
-
-  position: absolute;
-  z-index: 2;
-  top: 1px;
-  left: 1px;
-
   overflow: hidden;
-  border-radius: 20px;
-
-  background-color: var(--body-box-color);
-  transition: .5s;
-}
-.Reload-button::after {
-  content: '';
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 120px;
-  width: 120px;
-
-  position: absolute;
-  z-index: 1;
-  top: -30px;
-  left: -2px;
-
-  overflow: hidden;
-  border-radius: 50%;
-  
-  background: rgb(255,81,55);
-  background: linear-gradient(45deg, rgba(255,81,55,1) 15%, rgba(255,243,63,1) 30%, rgba(46,255,84,1) 50%, rgba(95,117,255,1) 70%, rgba(255,68,254,1) 90%);
-
-  transition: 1s;
-  transform-origin: center;
-}
-.Reload-button:hover::after {
-  animation: rotate 1s linear infinite;
-}
-@keyframes rotate {
-  0% {
-    rotate: 0deg;
-  } 
-  50% {
-    rotate: 180deg;
-  }
-  100% {
-    rotate: 360deg;
-  }
 }
 /* //////////////////////////////////////// */
 
 .Text-Admin-h1 {
-  height: 100%;
-  width: 100%;
+  margin: 0;
+  display: flex;
+  align-self: center;
 
-  text-align: center;
-  margin: 5px;
+  font-size: clamp(17px, 1.4vw, 30px);
+
   color: var(--color-Admin-text-h1);
 }
 
 
 .Since-ToDateBox-div {
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 10px;
 }
 .SinceText-p {
-  position: absolute;
-  top: -13px;
-  left: 10px;
-
+  margin: 0;
+  align-self: center;
   color: var(--color-text-normal);
   font-weight: bold;
+  grid-column: 1 /span 2;
+  justify-self: center;
 }
 .dateSince-input {
-  position: absolute;
-  top: 27px;
-  left: 10px;
-
+  height: 70%;
   border: 1px solid var(--color-text-normal);
   border-radius: 5px;
   font-size: 15px;
+  grid-column: 1 /span 2;
+  position: relative;
+  left: 5px;
+  justify-self: center;
 }
 
 .ToDateText-p {
-  position: absolute;
-  top: -13px;
-  left: 180px;
-
+  margin: 0;
+  align-self: center;
   color: var(--color-text-normal);
   font-weight: bold;
+  grid-column: 3 /span 2;
+  justify-self: center;
 }
 .dateToDate-input {
-  position: absolute;
-  top: 27px;
-  left: 180px;
-
+  height: 70%;
   border: 1px solid var(--color-text-normal);
   border-radius: 5px;
   font-size: 15px;
+  grid-column: 3 /span 2;
+  justify-self: center;
 }
+/* ////////////////////reload button//////////////////// */
+#reload-box-btn {
+  height: 70%;
+  width: 90%;
+
+  position: relative;
+  
+  align-self: center;
+
+  grid-column: 5 /span 2;
+  grid-row: 1 /span 2;
+}
+#reload-box-btn .button-rainbow::before {
+  content: 'Reload Data' !important;
+}
+/* /////////////////////////////////////////////////// */
 
 .leftBoxHide-button {
   height: 40px;
@@ -157,7 +94,6 @@
 
   position: relative;
   left: 10px;
-  top: 10px;
 
   font-size: 20px;
   font-weight: bold;
@@ -171,20 +107,22 @@
 /* ///////////input search//////////// */
 .searchBox-form {
   height: 45px;
-  width: 650px;
+  width: 90%;
 
   position: relative;
   left: 5%;
-  top: 8px;
  
   border-radius: 20px;
 
   background-color: var(--background-navigation-bar);
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .searchInput-input {
   height: 43px;
-  width: 550px;
+  width: calc(95% - 75px);
 
   position: relative;
   top: 0;
@@ -199,87 +137,28 @@
 
   outline: none;
   background-color: var(--background-navigation-bar);
+
 }
 
-.searchSubmit-inputBtn {
+/* search btn */
+#button-search-top-bar {
   height: 35px;
-  width: 70px;
-
+  width: 75px;
   position: absolute;
-  top: 5px;
   right: 6px;
-  z-index: 1;
-
-  border-radius: 20px;
-  border: none;
-
-  overflow: hidden;
-}
-.searchSubmit-inputBtn::after {
-  content: '';
-  height: 70px;
-  width: 70px;
-
-  position: absolute;
-  left: 0px;
-  top: -20px;
-
-  background: rgb(255,81,55);
-  background: linear-gradient(45deg, rgba(255,81,55,1) 15%, rgba(255,243,63,1) 30%, rgba(46,255,84,1) 50%, rgba(95,117,255,1) 70%, rgba(255,68,254,1) 90%);
-
-  transition: 1s;
-}
-.searchSubmit-inputBtn:hover::after {
-  animation: rotate 1s linear infinite;
-}
-@keyframes rotate {
-  0% {
-    rotate: 0deg;
-  } 
-  50% {
-    rotate: 180deg;
-  }
-  100% {
-    rotate: 360deg;
-  }
 }
 
-.searchSubmit-inputBtn::before {
-  content: 'Search';
-  height: 33px;
-  width: 68px;
 
-  color: var(--color-text-normal);
-  font-weight: bold;
-  /* chữ trong suốt */
-  mix-blend-mode: multiply;
-
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  z-index: 4;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: var(--body-box-color);
-
-  border-radius: 20px;
-  
-}
-
-/* ///////////////////////// */
+/* select tab page */
 .Select-tag-sel {
   height: 50%;
-  width: 80%;
+  width: 90%;
 
-  font-size: 20px;
+  font-size: clamp(13px, 1vw, 26px);
   color: var(--color-text-normal);
 
   position: relative;
-  top: 25%;
-  left: 15%;
+  
 
   border-radius: 10px;
   background-color: var(--background-navigation-bar);
