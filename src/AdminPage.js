@@ -33,6 +33,7 @@ const year = jsonDate.slice(1, 5);
 const month = jsonDate.slice(6, 8); 
 const day = jsonDate.slice(9, 11);
 
+
 function App() {
     //tạo biến useState để lưu thông tin đầu vào//
     const [TradingName, setTradingName] = useState("");
@@ -66,7 +67,7 @@ function App() {
     //full load để lấy tổng tiền đã dùng và số tiền còn lại//
     const fullSpendAndBalanceRequest = async () => {
         let Data = await fetch(
-        ' http://192.168.1.10:8000/fullSpendAndBalanceRequest', {
+        ' http://192.168.1.62:8000/fullSpendAndBalanceRequest', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -90,7 +91,7 @@ function App() {
     //request để load dữ liệu hiển thị//
     const DataBaseLoad = async () => {
         let DataBase = await fetch(
-        ' http://192.168.1.10:8000/onloadRequest', {
+        ' http://192.168.1.62:8000/onloadRequest', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -148,7 +149,6 @@ function App() {
     useEffect(() => {
        setHtmlItem(DataResp, PageTag, Data12Month);
     },[DataResp, PageTag, Data12Month]);
-
     
 
     //function chạy khi nhấn submit button//
@@ -170,7 +170,7 @@ function App() {
 
         //gửi yêu cầu tạo người dùng đến sẻver//
         let result = await fetch(
-        ' http://192.168.1.10:8000/SaveSpend', {
+        ' http://192.168.1.62:8000/SaveSpend', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -211,7 +211,7 @@ function App() {
 
         //gửi đến server//
         let data = await fetch(
-        ' http://192.168.1.10:8000/SaveReceive', {
+        ' http://192.168.1.62:8000/SaveReceive', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -241,7 +241,7 @@ function App() {
         if(!SearchString) return 0;
 
         let result = await fetch(
-        ' http://192.168.1.10:8000/SearchRequest', {
+        ' http://192.168.1.62:8000/SearchRequest', {
             method: "post",
             body: JSON.stringify({
                 title: "searchRequest",
@@ -262,7 +262,7 @@ function App() {
     //lấy dữ liệu của tháng// 
     const MonthDataInYearRequest = async () => {
         let result = await fetch(
-            ' http://192.168.1.10:8000/MonthDataInYearRequest', {
+            ' http://192.168.1.62:8000/MonthDataInYearRequest', {
             method: "post",
             body: JSON.stringify({
                 title: "dataInMonthRequest",
