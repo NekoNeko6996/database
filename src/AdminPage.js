@@ -14,7 +14,6 @@ import React from 'react';
 //better alert -- SweetAlert//
 import swal from 'sweetalert';
 
-
 //component// //dùng React.lazy giúp chia nhỏ file js sau khi build -> tăng tốc độ load//
 const ItemFormDataBaseDiv = React.lazy(() => import('./components/ItemComponents'));
 const NothingBox = React.lazy(() => import('./components/NothingComponents'));
@@ -61,12 +60,13 @@ function App() {
     const [SearchString, setSearchString] = useState("");
     //
     const [PageTag, setPageTag] = useState('spendPage');
-
+    //
+    const [TopBarHeight, setTopBarHeight] = useState('60px');
 
     //full load để lấy tổng tiền đã dùng và số tiền còn lại//
     const fullSpendAndBalanceRequest = async () => {
         let Data = await fetch(
-        ' http://localhost:8000/fullSpendAndBalanceRequest', {
+        ' http://192.168.1.10:8000/fullSpendAndBalanceRequest', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -90,7 +90,7 @@ function App() {
     //request để load dữ liệu hiển thị//
     const DataBaseLoad = async () => {
         let DataBase = await fetch(
-        ' http://localhost:8000/onloadRequest', {
+        ' http://192.168.1.10:8000/onloadRequest', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -170,7 +170,7 @@ function App() {
 
         //gửi yêu cầu tạo người dùng đến sẻver//
         let result = await fetch(
-        ' http://localhost:8000/SaveSpend', {
+        ' http://192.168.1.10:8000/SaveSpend', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -211,7 +211,7 @@ function App() {
 
         //gửi đến server//
         let data = await fetch(
-        ' http://localhost:8000/SaveReceive', {
+        ' http://192.168.1.10:8000/SaveReceive', {
             method: "post",
             body: JSON.stringify(
                 {
@@ -240,7 +240,7 @@ function App() {
         if(!SearchString) return 0;
 
         let result = await fetch(
-        ' http://localhost:8000/SearchRequest', {
+        ' http://192.168.1.10:8000/SearchRequest', {
             method: "post",
             body: JSON.stringify({
                 title: "searchRequest",
@@ -261,7 +261,7 @@ function App() {
     //lấy dữ liệu của tháng// 
     const MonthDataInYearRequest = async () => {
         let result = await fetch(
-            ' http://localhost:8000/MonthDataInYearRequest', {
+            ' http://192.168.1.10:8000/MonthDataInYearRequest', {
             method: "post",
             body: JSON.stringify({
                 title: "dataInMonthRequest",
@@ -288,10 +288,17 @@ function App() {
         console.log(LeftBox.id);
     }
 
+    const topBarClick = (className) => {
+        if(window.innerWidth < 701 && className === 'TopBar-box-div') {
+            if(TopBarHeight === '60px') setTopBarHeight('200px');
+            else setTopBarHeight('60px');
+        }
+    }
+
 /////////////////////////////////code html//////////////////////////////////////
     return (
         <>
-            <div className='TopBar-box-div'>
+            <div className='TopBar-box-div' style={{ height: TopBarHeight }} onClick={(event) => topBarClick(event.target.className)}>
                 <button className='leftBoxHide-button' onClick={onButtonHideClick}>L</button>
                 <h1 className='Text-Admin-h1'>Admin Page</h1>
                 
@@ -309,7 +316,6 @@ function App() {
                     </form>
                 </div>
 
-
                 <div className='Since-ToDateBox-div'>
                     <p className='SinceText-p'>Since</p>
                     <p className='ToDateText-p'>To Date</p>
@@ -317,8 +323,7 @@ function App() {
                     <input type='date' value={ToDate} onChange={(event) => setToDate(JSON.stringify(event.target.value).slice(1, 11))} className='dateToDate-input'/>
                     <div id='reload-box-btn'><button className='button-rainbow' id='reload' onClick={DataBaseLoad}></button></div>
                 </div>
-
-                <div></div>
+                
 
             </div>
 
@@ -333,10 +338,28 @@ function App() {
                         <input type='submit' className='ReceiveSubmit-button' onClick={SubmitReceive} value={"Submit"}/>
                         <input type='date' value={DateReceive} onChange={(event) => setDateReceive(event.target.value)} className='DateReceive-box'></input>
                     </form>
+                    <form action='' className='Form-box-form-left'>
+                        <h1 className='add-purchase-text-h1-left'>Add Purchase</h1>
+                        <input type='text' placeholder='Trading Name...' value={TradingName} onChange={(event) => setTradingName(event.target.value)} className='trading-name-input-left'/>
+                        <input type='number' placeholder='Amount...' value={Amount} onChange={(event) => setAmount(event.target.value)} className='spend-amount-input-left'/>
+                        <select name='tag-select' className='currency-select-left'value={Currency} onChange={(event) => setCurrency(event.target.value)}>
+                            <option value={'VND'}>VND</option>
+                            <option value={'USD'}>USD</option>
+                        </select>
+                        <input type='date' value={DatePurchase} onChange={(event) => setDatePurchase(event.target.value)} className='spend-date-input-left'/>
+                        
+                        <input type='text' placeholder='tag...' className='spend-tag-select-left' list='spend-tag-list-id' value={SpendTag} onChange={(event) => setSpendTag(event.target.value)}/>
+                        <datalist id='spend-tag-list-id'>
+                            <option value={'tuition'}>Học phí</option>
+                            <option value={'cost-of-living'}>Sinh hoạt phí</option>
+                            <option value={'different'}>Khác</option>
+                        </datalist>
+                        <div id='submit-box-btn'><button className='button-rainbow' id='save' onClick={handleOnSubmit}></button></div>
+                    </form>
                     <div className='user-box'>
                         <img className='user-img-avatar' src='https://i.pinimg.com/originals/86/dd/bb/86ddbb9654b59b76257867031c864407.jpg' alt='load err'/>
                         <p className='user-name-p'>Nguyễn Hoàng Nam</p>
-                    </div>
+                    </div>  
                 </div>
 
                 <BodyBox ItemHtml={ItemHtml}/>

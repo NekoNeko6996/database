@@ -107,3 +107,62 @@
     color: var(--color-text-normal);
     font-size: 20px;
 }
+
+
+.Form-box-form-left {
+    height: 220px;
+    width: 300px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin-top: 20px;
+}
+.add-purchase-text-h1-left {
+    font-size: 22px;
+    color: var(--color-text-normal);
+    grid-column: 1 /span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.trading-name-input-left {
+    height: 25px;
+    width: 250px;
+
+    justify-self: center;
+    
+    grid-column: 1 /span 2;
+    border-radius: 5px;
+    border: none;
+}
+.spend-amount-input-left {
+    height: 25px;
+    width: 250px;
+    justify-self: center;
+    
+    border-radius: 5px;
+    grid-column: 1 /span 2;
+    border: none;
+}
+.currency-select-left {
+    height: 30px;
+    width: 122px;
+    justify-self: right;
+    border-radius: 5px;
+    border: none;
+}
+.spend-date-input-left {
+    height: 30px;
+    width: 121px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+}
+.spend-tag-select-left {
+    height: 27px;
+    width: 119px;
+    border-radius: 5px;
+    border: none;
+    justify-self: right;
+}

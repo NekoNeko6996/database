@@ -118,21 +118,12 @@ body {
     grid-column-gap: 5px;
     grid-template-columns: 4fr 10fr 10fr 22fr 5fr 10fr;
   }
-  /* .Since-ToDateBox-div {
-    position: absolute;
-    top: 80px;
-    z-index: 10;
-    height: 60px;
-    width: 230px;
-
-    border: 1px solid red;
-  } */
 }
 @media screen and (max-width: 700px) {
   .TopBar-box-div {
     grid-column-gap: 5px;
-    grid-template-columns: 2fr 8fr 8fr 4fr !important;
-    grid-template-rows: repeat(3, 1fr) !important;
+    grid-template-columns: 2fr 8fr 8fr 1fr !important;
+    grid-template-rows: 60px 1fr 1fr !important;
   }
   #container-search-box {
     grid-column: 1 /span 4;
@@ -146,6 +137,10 @@ body {
   }
   .dateToDate-input {
     width: 110px !important;
+  }
+  #hide-btn-right-box {
+    grid-column: 4 !important;
+    grid-row: 1;
   }
   /* ////////////////////////////////////// */
   .Right-Box-div {
@@ -189,5 +184,17 @@ body {
     max-width: none !important;
     left: 120px !important;
     top: 25px !important;
+  }
+  .NothingBox-div {
+    height: 200px !important;
+    width: 300px !important;
+    top: calc(50% - 100px) !important;
+    left: calc(50% - 150px) !important;
+  }
+  #nothing-icon {
+    scale: 2 !important;
+  }
+  .nothingText-p {
+    font-size: 20px !important;
   }
 }

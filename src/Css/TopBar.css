@@ -1,21 +1,22 @@
 .TopBar-box-div {
   width: 100vw;
-  /* height: 230px; */
-  height: 60px;
 
   border-bottom: 1px solid black;
 
   display: grid;
-  grid-template-columns: 2fr 5fr 5fr 21fr 11fr 6fr;
+  grid-template-columns: 2fr 5fr 5fr 21fr 11fr 1fr;
   grid-template-rows: 60px;
-  grid-gap: 20px;
+  grid-gap: 15px;
 
   position: relative;
   background-color: var(--background-color);
   align-items: center;
 
   overflow: hidden;
+  
+  transition: .3s;
 }
+
 /* //////////////////////////////////////// */
 
 .Text-Admin-h1 {
@@ -163,4 +164,12 @@
   border-radius: 10px;
   background-color: var(--background-navigation-bar);
 
+}
+
+
+/* right box btn */
+#hide-btn-right-box {
+  grid-column: 6;
+  grid-row: 1;
+  
 }

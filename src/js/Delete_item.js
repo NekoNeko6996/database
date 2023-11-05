@@ -1,6 +1,7 @@
 //better alert -- SweetAlert//
 import swal from 'sweetalert';
 
+
 //
 export const delete_item_alert = (_id) => {
     swal("Delete Item", "Are you sure?", "warning", { buttons: ["Cancel", "Delete it!"] })
@@ -11,7 +12,7 @@ export const delete_item_alert = (_id) => {
     });   
 }
 const delete_item = async (_id) => {
-    let result = await fetch("http://localhost:8000/delete_item",
+    let result = await fetch(`http://192.168.1.10:8000/delete_item`,
     {
         method:"post",
         body: JSON.stringify(
