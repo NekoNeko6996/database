@@ -71,11 +71,13 @@
     left: 20px;
     border: none;
     border-radius: 5px;
-
+    cursor: pointer;
 }
 
 .ReceiveText-h2 {
     color: var(--color-text-normal);
+    text-align: center;
+    position: relative;
 }
 
 /* ////////user box///////// */

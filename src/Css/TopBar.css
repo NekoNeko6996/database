@@ -87,8 +87,7 @@
 #reload-box-btn .button-rainbow::before {
   content: 'Reload Data' !important;
 }
-/* /////////////////////////////////////////////////// */
-
+/* /////////////////////left box/////////////////////// */
 .leftBoxHide-button {
   height: 40px;
   width: 40px;
@@ -98,13 +97,27 @@
 
   font-size: 20px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  background-color: var(--background-left-box-btn-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
-.ReceiveText-h2 {
-  text-align: center;
-  position: relative;
+.leftBoxHide-button span {
+  height: 4px;
+  width: 25px;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+  background-color: var(--background-left-box-child-bar-color);
 }
-
+.leftBoxHide-button #top {
+  top: 13px;
+}
+.leftBoxHide-button #bottom {
+  top: 24px;
+}
 /* ///////////input search//////////// */
 .searchBox-form {
   height: 45px;

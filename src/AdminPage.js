@@ -231,6 +231,7 @@ function App() {
         if(data) {
             setNameGiver("");
             setAmountReceive("");
+            swal("Save Data", "Done!", "success")
         }
     }
 
@@ -278,13 +279,14 @@ function App() {
     }
 
     //đống mở left box//
-    const onButtonHideClick = () => {
+    const onButtonHideClick = (target) => {
         const LeftBox = document.querySelector('.LeftBox-div');
         if(LeftBox.id === 'LeftBox-close') {
             LeftBox.id = 'LeftBox-open';
         } else {
             LeftBox.id = 'LeftBox-close';
         }   
+        target.classList.toggle('active');
         console.log(LeftBox.id);
     }
 
@@ -299,7 +301,10 @@ function App() {
     return (
         <>
             <div className='TopBar-box-div' style={{ height: TopBarHeight }} onClick={(event) => topBarClick(event.target.className)}>
-                <button className='leftBoxHide-button' onClick={onButtonHideClick}>L</button>
+                <button className='leftBoxHide-button' onClick={(event) => onButtonHideClick(event.target)}>
+                    <span id='top'></span>
+                    <span id='bottom'></span>
+                </button>
                 <h1 className='Text-Admin-h1'>Admin Page</h1>
                 
                 <div>

@@ -31,7 +31,9 @@
   --color-rainbow: linear-gradient(45deg, rgba(255,81,55,1) 15%, rgba(255,243,63,1) 30%, rgba(46,255,84,1) 50%, rgba(95,117,255,1) 70%, rgba(255,68,254,1) 90%);
   --background-color-before: #343746;
 
-  
+  /* left box btn color */
+  --background-left-box-btn-color: #343746;
+  --background-left-box-child-bar-color: white;
 }
 body {
   min-width: 100vw;
