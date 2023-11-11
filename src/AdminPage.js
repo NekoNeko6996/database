@@ -70,7 +70,7 @@ function App() {
   //full load để lấy tổng tiền đã dùng và số tiền còn lại//
   const fullSpendAndBalanceRequest = async () => {
     let Data = await fetch(
-      " http://192.168.1.62:8000/fullSpendAndBalanceRequest",
+      " http://localhost:8000/fullSpendAndBalanceRequest",
       {
         method: "post",
         body: JSON.stringify({
@@ -92,7 +92,7 @@ function App() {
 
   //request để load dữ liệu hiển thị//
   const DataBaseLoad = async () => {
-    let DataBase = await fetch(" http://192.168.1.62:8000/onloadRequest", {
+    let DataBase = await fetch(" http://localhost:8000/onloadRequest", {
       method: "post",
       body: JSON.stringify({
         title: "OnloadRequest",
@@ -190,7 +190,7 @@ function App() {
     }
 
     //gửi yêu cầu tạo người dùng đến sẻver//
-    let result = await fetch(" http://192.168.1.62:8000/SaveSpend", {
+    let result = await fetch(" http://localhost:8000/SaveSpend", {
       method: "post",
       body: JSON.stringify({
         SpendTag,
@@ -236,7 +236,7 @@ function App() {
     }
 
     //gửi đến server//
-    let data = await fetch(" http://192.168.1.62:8000/SaveReceive", {
+    let data = await fetch(" http://localhost:8000/SaveReceive", {
       method: "post",
       body: JSON.stringify({
         title: "saveReceive",
@@ -264,7 +264,7 @@ function App() {
     event.preventDefault();
     if (!SearchString) return 0;
 
-    let result = await fetch(" http://192.168.1.62:8000/SearchRequest", {
+    let result = await fetch(" http://localhost:8000/SearchRequest", {
       method: "post",
       body: JSON.stringify({
         title: "searchRequest",
@@ -285,7 +285,7 @@ function App() {
   //lấy dữ liệu của tháng//
   const MonthDataInYearRequest = async () => {
     let result = await fetch(
-      " http://192.168.1.62:8000/MonthDataInYearRequest",
+      " http://localhost:8000/MonthDataInYearRequest",
       {
         method: "post",
         body: JSON.stringify({
